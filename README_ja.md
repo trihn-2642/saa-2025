@@ -21,6 +21,8 @@ Sun\* 社内向け **Agentic Coding** ハンズオン研修用リポジトリで
 
 ### 推奨技術スタック
 
+技術スタックに制限はありません。お好みのフレームワークや言語を自由にご利用いただけます。ただし、MoMorph で最良の体験を得るために、以下のスタックを推奨します:
+
 - **バックエンド（共通）:** [Supabase](https://supabase.com/) — データベース、認証、リアルタイム機能を提供する Backend-as-a-Service（BaaS）プラットフォーム
 - **Web:** Next.js + Cloudflare Workers + TailwindCSS + Supabase
 - **Android:** Kotlin + Jetpack Compose + Supabase

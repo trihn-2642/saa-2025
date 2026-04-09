@@ -21,6 +21,8 @@ Repository có các branch sau:
 
 ### Suggested Tech Stack
 
+Bạn không bị giới hạn về tech stack — có thể tự do sử dụng bất kỳ framework hay ngôn ngữ nào phù hợp. Tuy nhiên, chúng tôi khuyến nghị các stack sau để có trải nghiệm tốt nhất với MoMorph:
+
 - **Backend (chung):** [Supabase](https://supabase.com/) — Backend-as-a-Service (BaaS) cung cấp database, authentication và real-time features
 - **Web:** Next.js + Cloudflare Workers + TailwindCSS + Supabase
 - **Android:** Kotlin + Jetpack Compose + Supabase

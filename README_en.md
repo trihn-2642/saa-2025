@@ -21,6 +21,8 @@ This repository has the following branches:
 
 ### Suggested Tech Stack
 
+You are not limited to any specific tech stack — feel free to use any framework or language that suits you. However, we recommend the following stacks for the best experience with MoMorph:
+
 - **Backend (common):** [Supabase](https://supabase.com/) — Backend-as-a-Service (BaaS) platform providing database, authentication, and real-time features
 - **Web:** Next.js + Cloudflare Workers + TailwindCSS + Supabase
 - **Android:** Kotlin + Jetpack Compose + Supabase
