@@ -56,14 +56,28 @@ cd my-app
 # Mở Xcode → Create New Project → tạo project mới
 ```
 
-Sau khi khởi tạo xong, thiết lập git remote trỏ về repository của bài thực hành:
+Sau khi khởi tạo xong, thiết lập git remote theo mẫu sau:
 
 ```sh
 git init    # nếu project chưa có git
-git remote add origin git@github.com:sun-asterisk-internal/agentic-coding-hands-on.git
+
+# origin: fork cá nhân của bạn (thay <your-username> bằng GitHub username của bạn)
+git remote add origin git@github.com:<your-username>/agentic-coding-hands-on.git
+
+# upstream: repository gốc của bài thực hành
+git remote add upstream git@github.com:sun-asterisk-internal/agentic-coding-hands-on.git
 ```
 
-> **Tại sao cần đặt remote?** MoMorph VSCode Extension cần nhận diện repository để hiển thị Figma file đã liên kết. Đặt remote trỏ về `sun-asterisk-internal/agentic-coding-hands-on` giúp MoMorph hoạt động chính xác.
+Kiểm tra lại bằng `git remote -v`, kết quả mong muốn sẽ có dạng:
+
+```
+origin    git@github.com:<your-username>/agentic-coding-hands-on.git (fetch)
+origin    git@github.com:<your-username>/agentic-coding-hands-on.git (push)
+upstream  git@github.com:sun-asterisk-internal/agentic-coding-hands-on.git (fetch)
+upstream  git@github.com:sun-asterisk-internal/agentic-coding-hands-on.git (push)
+```
+
+> **Tại sao cần đặt remote?** MoMorph VSCode Extension cần nhận diện repository để hiển thị Figma file đã liên kết. Remote `upstream` trỏ về `sun-asterisk-internal/agentic-coding-hands-on` giúp MoMorph hoạt động chính xác, còn `origin` trỏ về fork cá nhân để bạn push code của mình.
 
 ### Bước 2: Đăng nhập MoMorph Web và kết nối tài khoản GitHub
 
