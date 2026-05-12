@@ -15,7 +15,7 @@ Repository có các branch sau:
 
 - Git
 - Docker (để chạy Supabase local)
-- [MoMorph CLI](https://github.com/momorph/cli)
+- [GitHub CLI](https://cli.github.com/)
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
 - [VSCode](https://code.visualstudio.com/) + MoMorph Extension — dùng để xem Figma frame list, copy prompt nhanh. Đặc biệt hữu ích cho mobile dev khi IDE chính (Android Studio, Xcode) không hỗ trợ MoMorph Extension.
 
@@ -87,83 +87,123 @@ upstream  git@github.com:sun-asterisk-internal/agentic-coding-hands-on.git (push
 2. Điền link file Figma sau để tiếp tục: https://www.figma.com/design/9ypp4enmFmdK3YAFJLIu6C/SAA-2025---Internal-Live-Coding
 3. Vào **Settings → GitHub → Connect** để kết nối tài khoản GitHub của bạn với MoMorph. Tuyệt đối không cập nhật trường **Select Repository**.
 
-### Bước 3: Cài đặt MoMorph CLI
+### Bước 3: Cài đặt và đăng nhập GitHub CLI
 
-Chọn một trong các cách sau:
+Chọn một trong các cách sau để cài đặt:
 
 ```sh
 # macOS / Linux (Homebrew):
-brew install momorph/tap/momorph-cli
+brew install gh
 
-# Windows (Chocolatey):
-choco install momorph
+# Windows (winget):
+winget install --id GitHub.cli
 
-# Windows (PowerShell):
-irm https://raw.githubusercontent.com/momorph/cli/refs/heads/main/scripts/install.ps1 | iex
+# Linux (Debian/Ubuntu):
+sudo apt install gh
 
-# Linux / macOS (Bash):
-curl -fsSL https://raw.githubusercontent.com/momorph/cli/refs/heads/main/scripts/install.sh | bash
+# Windows / macOS / Linux (Conda):
+conda install gh --channel conda-forge
 ```
 
 Xác nhận cài đặt thành công:
 
 ```sh
-momorph version
+gh --version
 ```
 
-### Bước 4: Đăng nhập MoMorph CLI
+Đăng nhập GitHub CLI:
 
 ```sh
-momorph login
+gh auth login
 ```
 
-CLI sẽ hiển thị một mã xác thực và link đăng nhập. Nhấn `Enter` để mở link trên trình duyệt, sau đó nhập mã để hoàn tất xác thực.
+Làm theo hướng dẫn trên CLI: chọn `GitHub.com`, chọn giao thức `HTTPS` hoặc `SSH`, và hoàn tất xác thực qua trình duyệt.
 
-Kiểm tra thông tin tài khoản:
+Kiểm tra trạng thái đăng nhập:
 
 ```sh
-momorph whoami
+gh auth status
 ```
 
-### Bước 5: Khởi tạo MoMorph project
+### Bước 4: Cài đặt Takumi CLI
 
-Chạy lệnh init để sinh ra các thư mục cấu hình (`.claude`, `.vscode` prompts, kết nối MCP server...):
+Cài Takumi CLI qua npm:
 
 ```sh
-# Nếu dùng Claude Code:
-momorph init . --ai claude
-
-# Nếu dùng GitHub Copilot:
-momorph init . --ai copilot
-
-# Nếu dùng Cursor:
-momorph init . --ai cursor
+npm install -g @sunasteriskrnd/takumi
 ```
 
-Lệnh này sẽ:
-- Tải template MoMorph project mới nhất
-- Sinh các file cấu hình (`.claude/`, prompt files, workflow scripts...)
-- Thiết lập kết nối MCP server cho AI agent đã chọn
-- Tự động cài đặt MoMorph VSCode Extension (nếu chưa cài). Sau khi cài đặt, mở source code repo trên VSCode → chạy command "MoMorph: Sign In" → click vào biểu tượng MoMorph trên sidebar → bạn sẽ thấy danh sách frame list của Figma file đã liên kết.
+Kết quả mong muốn:
 
-> **Lưu ý:** Nếu trong quá trình `momorph init` bạn gặp lỗi `failed to install extension` nhưng init vẫn hoàn tất, hãy cài extension thủ công bằng file VSIX có sẵn trong thư mục `resources/`:
-> ```sh
-> code --install-extension resources/vscode-momorph-0.13.0.vsix
-> ```
-> Hoặc tham khảo hướng dẫn chi tiết tại đây: https://sun-asterisk.enterprise.slack.com/docs/T02CQGZA7MK/F094K2LTV71?focus_section_id=temp:C:USe2e5a076e79fd458c9b713260c
+```
+Installed takumi@0.1.0
+```
 
-### Bước 6: Lọc màn hình mobile trên MoMorph VSCode Extension
+Khởi tạo Takumi cho project hiện tại:
 
-Nếu bạn đang thực hành với mobile, hãy lọc Figma Tree để chỉ hiển thị các thiết kế màn hình mobile:
+```sh
+tkm init
+```
+
+Kết quả mong muốn:
+
+```
+Initialized — 16 agents, 75+ skills ready
+```
+
+Kiểm tra môi trường hoạt động:
+
+```sh
+tkm doctor
+```
+
+Kết quả mong muốn:
+
+```
+All checks passed
+```
+
+### Bước 5: Đăng ký MCP Servers
+
+Đăng ký 2 MCP server cho Claude Code: **MoMorph** (để Takumi truy cập spec và design qua MCP) và **Playwright** (để tự động hóa trình duyệt khi visual validation / test UI):
+
+```sh
+claude mcp add --transport http --header "x-github-token: $(gh auth token)" momorph https://mcp.momorph.ai/mcp
+claude mcp add playwright npx @playwright/mcp@latest
+```
+
+> **Lưu ý:** Lệnh `momorph` MCP server dùng `gh auth token` để lấy GitHub token đã đăng nhập ở Bước 3. Nếu chưa đăng nhập GitHub CLI thành công, lệnh này sẽ thất bại.
+
+### Bước 6: Cài đặt MoMorph VSCode Extension
+
+Cài đặt MoMorph VSCode Extension từ file VSIX có sẵn trong thư mục `resources/`:
+
+```sh
+code --install-extension resources/vscode-momorph-0.13.0.vsix
+```
+
+Sau khi cài đặt, mở source code repo trên VSCode → mở Command Palette (`Cmd+Shift+P` trên macOS hoặc `Ctrl+Shift+P` trên Windows/Linux) → chạy command **"MoMorph: Sign In"** → click vào biểu tượng MoMorph trên sidebar → bạn sẽ thấy danh sách frame list của Figma file đã liên kết.
+
+> Tham khảo hướng dẫn chi tiết tại đây: https://sun-asterisk.enterprise.slack.com/docs/T02CQGZA7MK/F094K2LTV71?focus_section_id=temp:C:USe2e5a076e79fd458c9b713260c
+
+### Bước 7: Sử dụng MoMorph VSCode Extension
+
+MoMorph VSCode Extension hiển thị Figma Tree của file Figma đã liên kết, giúp bạn dễ dàng tra cứu và lấy thông tin frame (link, ID, prompt...) để sử dụng trong quá trình development.
+
+Để Figma Tree gọn hơn, hãy lọc theo platform mà bạn đang thực hành:
 
 1. Mở Command Palette: `Ctrl+Shift+P` (Windows/Linux) hoặc `Cmd+Shift+P` (macOS)
 2. Chạy: **MoMorph: Filter Screens**
-3. Filter by: **Figma Pages** → Chọn **"Mobile"**
+3. Filter by: **Figma Pages**
+   - Nếu thực hành **Mobile** (Android / iOS / React Native): chọn **"Mobile"**
+   - Nếu thực hành **Web**: chọn **"Website"**
 4. Filter by: **Spec Status** → Chọn **"Done"**
 
-Thao tác này giúp Figma Tree chỉ hiển thị các màn hình mobile đã hoàn thành spec, giúp bạn thao tác nhanh gọn hơn.
+Thao tác này giúp Figma Tree chỉ hiển thị các màn hình của platform bạn đang làm và đã hoàn thành spec, giúp bạn thao tác nhanh gọn hơn.
 
-### Bước 7: Bắt đầu generate code
+> **Mẹo:** Trong Figma Tree, bạn có thể chọn nhiều màn hình cùng lúc bằng cách giữ `Cmd` (macOS) / `Ctrl` (Windows/Linux) rồi click chuột trái vào từng màn hình. Sau đó click chuột phải → chọn **Copy Screen Information** để copy thông tin của tất cả các màn hình đã chọn, rất tiện khi muốn gen code cho nhiều màn hình đồng thời.
+
+### Bước 8: Bắt đầu generate code
 
 Sử dụng Figma project để thực hành:
 
@@ -175,117 +215,93 @@ Thông thường, trước khi bắt đầu generate code, ta cần chuẩn bị
 
 Screen spec trên server chính là nguồn thông tin gốc (source of truth) cho toàn bộ quy trình generate code phía sau.
 
-> **Lưu ý cho bài thực hành này:** Screen spec của các màn hình đã được chuẩn bị sẵn trên MoMorph server rồi, nên các bạn **không cần tạo lại screen spec** nữa mà có thể **bắt tay vào quy trình generate code ngay từ bước `/momorph.constitution`**. Tuy nhiên các bạn vẫn được khuyến khích tự tìm hiểu sâu hơn về quy trình tạo Screen Spec với MoMorph.
+> **Lưu ý cho bài thực hành này:** Screen spec của các màn hình đã được chuẩn bị sẵn trên MoMorph server rồi, nên các bạn **không cần tạo lại screen spec** mà có thể **bắt tay ngay vào quy trình generate code với Takumi Agent Kit**. Tuy nhiên các bạn vẫn được khuyến khích tự tìm hiểu sâu hơn về quy trình tạo Screen Spec với MoMorph.
 > - Vui lòng tham khảo thêm tài liệu [MoMorph Figma Plugin](https://sun-asterisk.enterprise.slack.com/docs/T02CQGZA7MK/F07S87PSVUN) để tìm hiểu chi tiết hơn về khâu viết Screen Spec.
-> - Vui lòng tham khảo thêm tài liệu về [MoMorph CLI Commands](https://sun-asterisk.enterprise.slack.com/docs/T02CQGZA7MK/F0A86NC88SK) sau đó trải nghiệm việc tạo screen specs cho một vài màn hình với command `momorph.specs`.
 
-#### Quy trình generate code với MoMorph
+#### Quy trình generate code với Takumi Agent Kit
 
-Sau khi đã có screen spec trên MoMorph server, sử dụng các slash commands trong AI agent để generate code:
+Takumi Agent Kit cung cấp các slash commands và agent skills tích hợp với MoMorph MCP để generate code từ Figma design. Tuỳ vào mục tiêu và độ phức tạp, bạn có thể chọn một trong **4 scenario** dưới đây.
 
-1. **`/momorph.constitution`** — Khởi tạo coding standards và conventions cho project. Đây là command hầu như bạn chỉ cần dùng một lần ở đầu quy trình để thiết lập các quy tắc phát triển mà AI Agent cần tuân thủ xuyên suốt quá trình generate code sau này.
-2. **`/momorph.specify`** — Kéo screen spec và thông tin design Figma về local thông qua MoMorph MCP, tiến hành phân tích và sinh ra các file đặc tả chi tiết (`spec.md`, `design-style.md`). Với mỗi một chức năng/màn hình, chúng ta sẽ bắt đầu từ command này để tạo context ban đầu.
-3. **`/momorph.reviewspecify`** — Review và refine spec output (nên chạy 2–3 lần để kết quả tốt hơn)
-4. **`/momorph.plan`** — Tạo implementation plan chi tiết
-5. **`/momorph.reviewplan`** — Review và refine plan output (nên chạy 2–3 lần để kết quả tốt hơn)
-6. **`/momorph.tasks`** — Chia nhỏ plan thành danh sách task thực thi
-7. **`/momorph.implement`** — Thực thi tasks, sinh code cũng như test
+##### Scenario 1: Simple or medium feature
 
-> **Tại sao đã có spec trên MoMorph rồi mà vẫn cần chạy `/momorph.specify`?**
->
-> - **Screen spec trên MoMorph server** là bản mô tả chức năng, behavior, business logic do con người viết và lưu trên nền tảng MoMorph Web. Nó đóng vai trò nguồn thông tin gốc (source of truth).
-> - **`/momorph.specify`** sẽ đọc screen spec đó từ server, **kết hợp với thông tin design từ Figma (layout, style, component structure...)**, rồi tổng hợp lại thành các file spec chi tiết, lưu cục bộ ngay trong repo (`spec.md`, `design-style.md`). Các file này chính là context trực tiếp mà AI agent sử dụng trong các bước tiếp theo (plan, tasks, implement).
->
-> Nói cách khác: spec trên MoMorph server là **screen spec** theo format của Sun\*, được viết ra để hướng đến con người đọc hiểu và review. Còn output của `/momorph.specify` là một bản **implementation spec** được tổng hợp từ nhiều nguồn, là **context đã được xử lý và làm giàu** để AI Agent có thể hiểu và sinh code chính xác.
+*Scope rõ ràng, mất từ vài phút đến 1–2 ngày, không cần review plan trước khi code.*
 
-#### Ví dụ prompt cho từng command
-
-**1. `/momorph.constitution`** — Tạo các quy tắc phát triển cần tuân thủ trong project:
+Gọi `/tkm:takumi` với một hoặc nhiều MoMorph Screen URL. Takumi sẽ đọc spec và test case qua MoMorph MCP, hỏi rõ những phần còn mơ hồ, rồi viết code phù hợp với pattern hiện có của project — UI khớp Figma, backend chạy song song. Code reviewer kích hoạt tự động. **Một command, một PR.**
 
 ```
-/momorph.constitution Viết clean code, tổ chức source code rõ ràng, ngắn gọn. Áp dụng các best practices cho tech stack đã chọn và Supabase. Ứng dụng cần tuân theo UI patterns và guidelines phù hợp với platform (Material Design cho Android, Human Interface Guidelines cho iOS, responsive web design cho web). Tuân thủ các tiêu chuẩn bảo mật OWASP secure coding practices.
+/tkm:takumi <MoMorph Screen URLs>
 ```
 
-**2. `/momorph.specify`** — Tạo local specs + tổng hợp thông tin về figma design:
+Ví dụ:
 
 ```
-/momorph.specify Tạo specs cho màn hình Login sau:
-https://momorph.ai/files/Z9KFZ0aAoOfkVEIPuwwkZl/frames/662:14387
+/tkm:takumi Implement the login page (/login), use Supabase local project:
+https://momorph.ai/files/9ypp4enmFmdK3YAFJLIu6C/screens/GzbNeVGJHz
 ```
 
-**3. `/momorph.reviewspecify`** — Review spec đã sinh:
+##### Scenario 2: Complex feature
+
+*Subsystem mới, nhiều màn hình tương tác phức tạp, business logic chạm tới core infrastructure — cần review scope trước khi code, làm nhiều ngày.*
+
+Dùng `/tkm:create-plan` với các MoMorph Screen URL để chia feature thành nhiều phase với acceptance criteria cụ thể. Review plan, chỉnh sửa nếu cần, sau đó `/tkm:takumi path/to/plan.md` sẽ thực thi từng phase kèm checkpoint. Planning trước giúp align scope và tránh đi sai hướng giữa chừng — đặc biệt cần khi nhiều người cùng làm hoặc feature đụng tới core infrastructure.
 
 ```
-/momorph.reviewspecify Review specs cho màn hình Login sau:
-https://momorph.ai/files/Z9KFZ0aAoOfkVEIPuwwkZl/frames/662:14387
+/tkm:create-plan <MoMorph Screen URLs>
+/tkm:takumi [plan]
 ```
 
-> Nên chạy lệnh này 2–3 lần để spec được review kỹ hơn.
-
-**4. `/momorph.plan`** — Tạo implementation plan:
+Ví dụ:
 
 ```
-/momorph.plan Sử dụng Supabase Auth. Hãy tạo kế hoạch phát triển màn hình Login:
-https://momorph.ai/files/Z9KFZ0aAoOfkVEIPuwwkZl/frames/662:14387
+/tkm:create-plan Implement admin dashboard with RBAC, user management, and audit logs, use Supabase local project:
+1. Dashboard: https://momorph.ai/files/9ypp4enmFmdK3YAFJLIu6C/screens/K3mF2nLpQ7
+2. UsersList: https://momorph.ai/files/9ypp4enmFmdK3YAFJLIu6C/screens/RxV8aBcD2e
+3. UserDetail: https://momorph.ai/files/9ypp4enmFmdK3YAFJLIu6C/screens/H4nMpL6vWq
 ```
 
-**5. `/momorph.reviewplan`** — Review plan đã sinh:
-
 ```
-/momorph.reviewplan Hãy review lại plan của màn hình Login:
-https://momorph.ai/files/Z9KFZ0aAoOfkVEIPuwwkZl/frames/662:14387
+/tkm:takumi plans/260512-1030-admin-dashboard/plan.md
 ```
 
-> Nên chạy lệnh này 2–3 lần để plan được review kỹ hơn.
+##### Scenario 3: UI only from design
 
-**6. `/momorph.tasks`** — Chia plan thành danh sách tasks:
+*Bạn chỉ cần biến Figma design thành UI component — không backend, không business logic.*
 
-```
-/momorph.tasks Hãy phân chia công việc phát triển màn Login:
-https://momorph.ai/files/Z9KFZ0aAoOfkVEIPuwwkZl/frames/662:14387
-```
-
-**7. `/momorph.implement`** — Thực thi tasks, sinh code:
+Bỏ qua full Takumi pipeline và gọi trực tiếp skill `/momorph-implement-design`. Skill này đọc màn hình qua MoMorph MCP, lấy chính xác giá trị visual từ design (không đoán), generate UI component với mock data lấy từ chính design, và chạy visual validation loop so với Figma reference đến khi output khớp. Đây là path nhanh nhất khi mục tiêu thuần UI.
 
 ```
-/momorph.implement Tiến hành phát triển màn Login:
-https://momorph.ai/files/Z9KFZ0aAoOfkVEIPuwwkZl/frames/662:14387
+/momorph-implement-design <MoMorph Screen URLs>
 ```
 
-**8. Fix bug sau khi implement hết các tasks:**
+Ví dụ:
 
-Khuyến nghị tiếp tục sử dụng command `/momorph.implement` để fix bug:
 ```
-/momorph.implement Thêm task fix bug sai font chữ ở footer. Hãy review lại một lượt xem font chữ các các item đã đúng theo design chưa.
-```
-
-### Bước 8: Chạy project
-
-Chạy project theo platform bạn đang sử dụng:
-
-```sh
-# Supabase local (chung cho tất cả platforms):
-npx supabase start    # Khởi động Supabase local
-npx supabase stop     # Dừng Supabase local
+/momorph-implement-design Build the login page UI from design:
+https://momorph.ai/files/9ypp4enmFmdK3YAFJLIu6C/screens/GzbNeVGJHz
 ```
 
-```sh
-# Web (Next.js):
-yarn dev              # hoặc npm run dev
+##### Scenario 4: Fix a bug on a screen
 
-# Android:
-# Run từ Android Studio (Shift+F10)
+*Code hiện tại của một màn hình có bug — UI sai, logic sai, thiếu validation, hoặc design/spec/test case trên MoMorph đã được update mà code chưa kịp theo.*
 
-# iOS:
-# Run từ Xcode (Cmd+R)
+Gọi `/tkm:fix-bug` với mô tả bug và MoMorph screen URL. Skill này pull code hiện tại cùng với design, spec, và test case, rồi diff để xác định chính xác chỗ code lệch khỏi nguồn-thông-tin-gốc. Root cause hiện ra kèm `file:line`, fix được apply dưới dạng patch tối thiểu, spec và test case liên quan được chạy lại để verify trước khi commit.
 
-# React Native:
-npx expo start        # hoặc npx react-native run-android / run-ios
+```
+/tkm:fix-bug <bug description> <MoMorph Screen URL>
+```
+
+Ví dụ:
+
+```
+/tkm:fix-bug The login button does not submit the form when Enter is pressed, and the validation message disappears after the user edits the input:
+https://momorph.ai/files/9ypp4enmFmdK3YAFJLIu6C/screens/GzbNeVGJHz
 ```
 
 ## Tài liệu tham khảo
 
-- [MoMorph CLI Documentation](https://sun-asterisk.enterprise.slack.com/docs/T02CQGZA7MK/F0A86NC88SK)
+- [Takumi Agent Kit](https://takumi.sun-asterisk.ai/)
+- [Takumi — Working with MoMorph](https://takumi.sun-asterisk.ai/docs/use-cases/momorph-codegen/)
+- [GitHub CLI Installation](https://github.com/cli/cli#installation)
 - [MoMorph MCP Server](https://sun-asterisk.enterprise.slack.com/docs/T02CQGZA7MK/F0A9HULD5D0)
 - [MoMorph VSCode Extension](https://sun-asterisk.enterprise.slack.com/docs/T02CQGZA7MK/F094K2LTV71)
 - [MoMorph Web](https://sun-asterisk.enterprise.slack.com/docs/T02CQGZA7MK/F092SAQBXR8)
