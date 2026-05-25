@@ -171,7 +171,7 @@ All checks passed
 Register 2 MCP servers for Claude Code: **MoMorph** (so Takumi can access specs and designs via MCP) and **Playwright** (for browser automation during visual validation / UI testing):
 
 ```sh
-claude mcp add --transport http --header "x-github-token: $(gh auth token)" momorph https://mcp.momorph.ai/mcp
+claude mcp add --transport http momorph https://mcp.momorph.ai/mcp --header "x-github-token: $(gh auth token)"
 claude mcp add playwright npx @playwright/mcp@latest
 ```
 

@@ -171,7 +171,7 @@ All checks passed
 Đăng ký 2 MCP server cho Claude Code: **MoMorph** (để Takumi truy cập spec và design qua MCP) và **Playwright** (để tự động hóa trình duyệt khi visual validation / test UI):
 
 ```sh
-claude mcp add --transport http --header "x-github-token: $(gh auth token)" momorph https://mcp.momorph.ai/mcp
+claude mcp add --transport http momorph https://mcp.momorph.ai/mcp --header "x-github-token: $(gh auth token)"
 claude mcp add playwright npx @playwright/mcp@latest
 ```
 

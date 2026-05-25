@@ -171,7 +171,7 @@ All checks passed
 Claude Code に 2 つの MCP サーバーを登録します: **MoMorph**（Takumi が MCP 経由でスペックとデザインにアクセスするため）と **Playwright**（視覚検証 / UI テスト時のブラウザ自動化のため）:
 
 ```sh
-claude mcp add --transport http --header "x-github-token: $(gh auth token)" momorph https://mcp.momorph.ai/mcp
+claude mcp add --transport http momorph https://mcp.momorph.ai/mcp --header "x-github-token: $(gh auth token)"
 claude mcp add playwright npx @playwright/mcp@latest
 ```
 
