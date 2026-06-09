@@ -1,8 +1,47 @@
 @import "tailwindcss";
 
+/* The LED 7-segment font is loaded via next/font/local in layout.tsx
+   (exposed as --font-dseg7). */
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* ── Design system palette (from Figma) ───────────────────────────── */
+
+  /* Primary */
+  --primary-light: #fffdf5;
+  --primary-light-hover: #fffcf0;
+  --primary-light-active: #fff8e1;
+  --primary-normal: #ffea9e;
+  --primary-normal-hover: #e6d38e;
+  --primary-normal-active: #ccbb7e;
+  --primary-dark: #bfb077;
+  --primary-dark-hover: #998c5f;
+  --primary-dark-active: #736947;
+  --primary-darker: #595237;
+
+  /* Neutral */
+  --neutral-light: #ffffff;
+  --neutral-light-hover: #ffffff;
+  --neutral-light-active: #ffffff;
+  --neutral-normal: #ffffff;
+  --neutral-normal-hover: #e6e6e6;
+  --neutral-normal-active: #cccccc;
+  --neutral-dark: #bfbfbf;
+  --neutral-dark-hover: #999999;
+  --neutral-dark-active: #737373;
+  --neutral-darker: #595959;
+
+  /* Details */
+  --details-background: #00101a;
+  --details-container: #101417;
+  --text-primary-1: #ffea9e;
+  --text-primary-2: #00101a;
+  --text-secondary-1: #ffffff;
+  --text-secondary-2: #ffffff;
+  --button-hover: rgba(255, 234, 158, 0.1); /* FFEA9E @ 10% */
+  --button-normal: rgba(255, 234, 158, 0); /* FFEA9E @ 0% */
 }
 
 @theme inline {
@@ -10,6 +49,43 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-montserrat: var(--font-montserrat);
+  /* LED 7-segment digit font — exposed as the `font-digital` utility. */
+  --font-digital: var(--font-dseg7), monospace;
+
+  /* Primary — `bg-primary`, `text-primary-normal`, etc. */
+  --color-primary-light: var(--primary-light);
+  --color-primary-light-hover: var(--primary-light-hover);
+  --color-primary-light-active: var(--primary-light-active);
+  --color-primary-normal: var(--primary-normal);
+  --color-primary-normal-hover: var(--primary-normal-hover);
+  --color-primary-normal-active: var(--primary-normal-active);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-dark-hover: var(--primary-dark-hover);
+  --color-primary-dark-active: var(--primary-dark-active);
+  --color-primary-darker: var(--primary-darker);
+
+  /* Neutral */
+  --color-neutral-light: var(--neutral-light);
+  --color-neutral-light-hover: var(--neutral-light-hover);
+  --color-neutral-light-active: var(--neutral-light-active);
+  --color-neutral-normal: var(--neutral-normal);
+  --color-neutral-normal-hover: var(--neutral-normal-hover);
+  --color-neutral-normal-active: var(--neutral-normal-active);
+  --color-neutral-dark: var(--neutral-dark);
+  --color-neutral-dark-hover: var(--neutral-dark-hover);
+  --color-neutral-dark-active: var(--neutral-dark-active);
+  --color-neutral-darker: var(--neutral-darker);
+
+  /* Details */
+  --color-details-background: var(--details-background);
+  --color-details-container: var(--details-container);
+  --color-text-primary-1: var(--text-primary-1);
+  --color-text-primary-2: var(--text-primary-2);
+  --color-text-secondary-1: var(--text-secondary-1);
+  --color-text-secondary-2: var(--text-secondary-2);
+  --color-button-hover: var(--button-hover);
+  --color-button-normal: var(--button-normal);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +98,5 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
