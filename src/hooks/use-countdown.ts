@@ -15,7 +15,9 @@ import {
  * interval only runs on the client. Returns 2-digit DAYS/HOURS/MINUTES strings
  * plus `isComplete`.
  */
-export function useCountdown(targetMs: number = getCountdownTargetMs()): FormattedCountdown {
+export function useCountdown(
+  targetMs: number = getCountdownTargetMs(),
+): FormattedCountdown {
   const [value, setValue] = useState<FormattedCountdown>(() =>
     getFormattedCountdown(targetMs, Date.now()),
   );

@@ -1,0 +1,27 @@
+# Dependencies & build output
+node_modules
+.next
+out
+build
+
+# Generated / vendored
+public
+*.lock
+yarn.lock
+pnpm-lock.yaml
+package-lock.json
+
+# Takumi kit (managed by tkm, not hand-formatted)
+.claude
+AGENTS.md
+
+# Course docs — keep original formatting
+README_en.md
+README_ja.md
+README.md
+
+# Misc
+.vercel
+coverage
+playwright-report
+test-results

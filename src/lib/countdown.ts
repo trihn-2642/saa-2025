@@ -37,7 +37,10 @@ export function getCountdownTargetMs(
  * Compute remaining DAYS/HOURS/MINUTES between `nowMs` and `targetMs`.
  * Returns all zeros (isComplete=true) once the target is reached/passed.
  */
-export function computeCountdown(targetMs: number, nowMs: number): CountdownParts {
+export function computeCountdown(
+  targetMs: number,
+  nowMs: number,
+): CountdownParts {
   const diffMs = targetMs - nowMs;
   if (!Number.isFinite(diffMs) || diffMs <= 0) {
     return { days: 0, hours: 0, minutes: 0, isComplete: true };
@@ -66,7 +69,9 @@ export function clampUnit(value: number, max: number): number {
 /** Format a unit as a 2-digit, leading-zero string (e.g. 5 -> "05").
  *  Values are clamped to 0–99 so the result is always exactly two digits. */
 export function formatTwoDigits(value: number): string {
-  const safe = Number.isFinite(value) ? Math.min(Math.max(0, Math.floor(value)), 99) : 0;
+  const safe = Number.isFinite(value)
+    ? Math.min(Math.max(0, Math.floor(value)), 99)
+    : 0;
   return String(safe).padStart(2, "0");
 }
 
@@ -82,7 +87,10 @@ export function getFormattedCountdown(
   targetMs: number,
   nowMs: number,
 ): FormattedCountdown {
-  const { days, hours, minutes, isComplete } = computeCountdown(targetMs, nowMs);
+  const { days, hours, minutes, isComplete } = computeCountdown(
+    targetMs,
+    nowMs,
+  );
   return {
     days: formatTwoDigits(clampDays(days)),
     hours: formatTwoDigits(clampUnit(hours, 23)),

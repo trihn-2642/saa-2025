@@ -29,7 +29,7 @@ export function CountdownDigit({ char }: CountdownDigitProps) {
         }}
       />
       {/* lit digit */}
-      <span className="font-digital relative z-10 text-[58px] leading-none text-text-secondary-1 sm:text-[74px]">
+      <span className="relative z-10 font-digital text-[58px] leading-none text-text-secondary-1 sm:text-[74px]">
         {char}
       </span>
     </div>

@@ -16,7 +16,9 @@ test.describe("Countdown prelaunch page", () => {
     }
   });
 
-  test("shows six single-digit LED boxes and no SECONDS unit", async ({ page }) => {
+  test("shows six single-digit LED boxes and no SECONDS unit", async ({
+    page,
+  }) => {
     await page.goto("/countdown");
     const digits = page.locator(".font-digital");
     await expect(digits).toHaveCount(6); // 3 units × 2 digits

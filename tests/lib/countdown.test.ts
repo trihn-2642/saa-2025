@@ -39,8 +39,18 @@ describe("computeCountdown", () => {
   });
 
   it("returns all zeros + isComplete once the target is reached/passed (TC 50fc4021)", () => {
-    expect(computeCountdown(0, 0)).toEqual({ days: 0, hours: 0, minutes: 0, isComplete: true });
-    expect(computeCountdown(-HOUR, 0)).toEqual({ days: 0, hours: 0, minutes: 0, isComplete: true });
+    expect(computeCountdown(0, 0)).toEqual({
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      isComplete: true,
+    });
+    expect(computeCountdown(-HOUR, 0)).toEqual({
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      isComplete: true,
+    });
   });
 });
 
