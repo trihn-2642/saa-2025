@@ -27,7 +27,7 @@ export function CountdownUnit({ value, label }: CountdownUnitProps) {
         <CountdownDigit char={second} />
       </div>
       {/* mm:unit-label */}
-      <span className="font-montserrat text-2xl font-bold uppercase leading-none text-text-secondary-1 sm:text-4xl">
+      <span className="font-montserrat text-2xl leading-none font-bold text-text-secondary-1 uppercase sm:text-4xl">
         {label}
       </span>
     </div>

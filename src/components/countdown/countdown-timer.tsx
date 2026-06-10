@@ -36,7 +36,7 @@ export function CountdownTimer({
     // mm:countdown-timer
     <div className="flex flex-col items-center gap-6">
       {/* mm:countdown-title */}
-      <h1 className="font-montserrat text-center text-2xl font-bold text-text-secondary-1 sm:text-4xl">
+      <h1 className="text-center font-montserrat text-2xl font-bold text-text-secondary-1 sm:text-4xl">
         {title}
       </h1>
 
