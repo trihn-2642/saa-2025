@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
 import { Geist, Geist_Mono, Montserrat } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -27,25 +29,32 @@ const geistMono = Geist_Mono({
 const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin", "vietnamese"],
-  weight: ["700"],
+  weight: ["400", "500", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "Countdown — Prelaunch",
-  description: "Event countdown prelaunch page",
+  title: "SAA 2025",
+  description: "Sun* Annual Awards 2025",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
     <html
-      lang="vi"
+      lang={locale}
       className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} ${dseg7.variable} h-full antialiased`}
     >
-      <body className="min-h-full">{children}</body>
+      <body className="min-h-full">
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          {children}
+        </NextIntlClientProvider>
+      </body>
     </html>
   );
 }

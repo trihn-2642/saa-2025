@@ -194,6 +194,7 @@ export interface DropdownSelectProps {
   /** Trigger button style (default "secondary"). */
   triggerVariant?: NonNullable<ButtonProps["variant"]>;
   className?: string;
+  buttonClassName?: string;
   menuClassName?: string;
 }
 
@@ -218,6 +219,7 @@ export function DropdownSelect({
   placeholder = "Select…",
   triggerVariant = "secondary",
   className,
+  buttonClassName,
   menuClassName,
 }: DropdownSelectProps) {
   const [open, setOpen] = useState(false);
@@ -272,6 +274,7 @@ export function DropdownSelect({
       <Button
         type="button"
         variant={triggerVariant}
+        className={buttonClassName}
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-controls={open ? listId : undefined}

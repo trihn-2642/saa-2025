@@ -1,6 +1,16 @@
+import createNextIntlPlugin from "next-intl/plugin";
 import type { NextConfig } from "next";
 
+const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
+
 const nextConfig: NextConfig = {
+  images: {
+    // Google account avatars (user_metadata.picture / avatar_url) are served
+    // from this host; next/image must allow-list it to optimize remote images.
+    remotePatterns: [
+      { protocol: "https", hostname: "lh3.googleusercontent.com" },
+    ],
+  },
   turbopack: {
     rules: {
       // Import .svg as a React component (SVGR). `currentColor` makes icons
@@ -29,4 +39,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);
