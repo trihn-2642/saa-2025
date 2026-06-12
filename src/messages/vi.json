@@ -1,0 +1,23 @@
+{
+  "common": {
+    "logout": "Đăng xuất"
+  },
+  "login": {
+    "welcome1": "Bắt đầu hành trình của bạn cùng SAA 2025.",
+    "welcome2": "Đăng nhập để khám phá!",
+    "google": "LOGIN With Google",
+    "error": "Đăng nhập thất bại. Vui lòng thử lại.",
+    "footer": "Bản quyền thuộc về Sun* © 2025"
+  },
+  "dashboard": {
+    "title": "Bảng điều khiển",
+    "greeting": "Xin chào"
+  },
+  "countdown": {
+    "title": "Sự kiện sẽ bắt đầu sau",
+    "days": "DAYS",
+    "hours": "HOURS",
+    "minutes": "MINUTES",
+    "srRemaining": "Còn {days} ngày, {hours} giờ, {minutes} phút"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "common": {
+    "logout": "Logout"
+  },
+  "login": {
+    "welcome1": "Start your journey with SAA 2025.",
+    "welcome2": "Sign in to explore!",
+    "google": "LOGIN With Google",
+    "error": "Sign-in failed. Please try again.",
+    "footer": "Copyright © Sun* 2025"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "greeting": "Hello"
+  },
+  "countdown": {
+    "title": "The event starts in",
+    "days": "DAYS",
+    "hours": "HOURS",
+    "minutes": "MINUTES",
+    "srRemaining": "{days} days, {hours} hours, {minutes} minutes remaining"
+  }
+}

@@ -11,9 +11,19 @@
 
 import { CountdownUnit } from "./countdown-unit";
 
+export interface CountdownLabels {
+  days: string;
+  hours: string;
+  minutes: string;
+}
+
 export interface CountdownTimerProps {
   /** Heading text shown above the digits. */
   title?: string;
+  /** Unit labels (i18n). Defaults match the Figma design. */
+  labels?: CountdownLabels;
+  /** Screen-reader sentence for the timer (i18n). */
+  srText?: string;
   /** Days value (0–99); number or pre-padded 2-char string. */
   days?: number | string;
   /** Hours value (0–23); number or pre-padded 2-char string. */
@@ -22,16 +32,26 @@ export interface CountdownTimerProps {
   minutes?: number | string;
 }
 
+const DEFAULT_LABELS: CountdownLabels = {
+  days: "DAYS",
+  hours: "HOURS",
+  minutes: "MINUTES",
+};
+
 function pad(value: number | string): string {
   return String(value).padStart(2, "0").slice(0, 2);
 }
 
 export function CountdownTimer({
   title = "Sự kiện sẽ bắt đầu sau",
+  labels = DEFAULT_LABELS,
+  srText,
   days = "00",
   hours = "05",
   minutes = "20",
 }: CountdownTimerProps) {
+  const fallbackSr = `${pad(days)} days, ${pad(hours)} hours, ${pad(minutes)} minutes remaining`;
+
   return (
     // mm:countdown-timer
     <div className="flex flex-col items-center gap-6">
@@ -46,12 +66,10 @@ export function CountdownTimer({
         role="timer"
         aria-live="off"
       >
-        <span className="sr-only">
-          {`${pad(days)} days, ${pad(hours)} hours, ${pad(minutes)} minutes remaining`}
-        </span>
-        <CountdownUnit value={pad(days)} label="DAYS" />
-        <CountdownUnit value={pad(hours)} label="HOURS" />
-        <CountdownUnit value={pad(minutes)} label="MINUTES" />
+        <span className="sr-only">{srText ?? fallbackSr}</span>
+        <CountdownUnit value={pad(days)} label={labels.days} />
+        <CountdownUnit value={pad(hours)} label={labels.hours} />
+        <CountdownUnit value={pad(minutes)} label={labels.minutes} />
       </div>
     </div>
   );
