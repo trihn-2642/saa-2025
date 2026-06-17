@@ -46,7 +46,7 @@ export function Dropdown({
 
 // ── Item ─────────────────────────────────────────────────────────────────────
 const itemVariants = cva(
-  "flex w-full items-center gap-1 rounded-[4px] px-4 py-4 text-left font-montserrat text-base font-normal text-white transition-colors hover:bg-button-hover [&_svg]:size-5 [&_svg]:shrink-0",
+  "flex w-full cursor-pointer items-center gap-1 rounded-[4px] px-4 py-4 text-left text-base font-bold whitespace-nowrap text-white transition-colors hover:bg-button-hover disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-5 [&_svg]:shrink-0",
   {
     variants: {
       selected: {
@@ -274,7 +274,7 @@ export function DropdownSelect({
       <Button
         type="button"
         variant={triggerVariant}
-        className={buttonClassName}
+        className={cn("font-bold", buttonClassName)}
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-controls={open ? listId : undefined}

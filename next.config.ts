@@ -13,8 +13,10 @@ const nextConfig: NextConfig = {
   },
   turbopack: {
     rules: {
-      // Import .svg as a React component (SVGR). `currentColor` makes icons
-      // inherit the surrounding text color so one file adapts to any context.
+      // Import .svg as a React component (SVGR). Colors are NOT forced to
+      // currentColor globally (that would flatten multicolor icons like the
+      // Sun* mark). Single-color icons opt in by using fill="currentColor" in
+      // their own .svg file; multicolor icons keep their exported colors.
       "*.svg": {
         loaders: [
           {
@@ -27,7 +29,6 @@ const nextConfig: NextConfig = {
                     name: "preset-default",
                     params: { overrides: { removeViewBox: false } },
                   },
-                  { name: "convertColors", params: { currentColor: true } },
                 ],
               },
             },

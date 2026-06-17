@@ -72,10 +72,10 @@ function LoginContent() {
           {/* Frame 550: gap 24px, indented 16px from the key visual */}
           <div className="flex flex-col items-start gap-6 pl-4">
             <div className="flex flex-col">
-              <p className="font-montserrat text-xl leading-10 font-bold tracking-[0.5px] text-white">
+              <p className="text-xl leading-10 font-bold tracking-[0.5px] text-white">
                 {t("welcome1")}
               </p>
-              <p className="font-montserrat text-xl leading-10 font-bold tracking-[0.5px] text-white">
+              <p className="text-xl leading-10 font-bold tracking-[0.5px] text-white">
                 {t("welcome2")}
               </p>
             </div>
@@ -96,7 +96,7 @@ function LoginContent() {
             </Button>
 
             {showError ? (
-              <p role="alert" className="font-montserrat text-sm text-red-400">
+              <p role="alert" className="text-sm text-red-400">
                 {t("error")}
               </p>
             ) : null}
@@ -104,8 +104,8 @@ function LoginContent() {
         </div>
       </main>
 
-      <footer className="relative z-10 flex w-full items-center justify-center border-t border-[#2E3940] bg-[rgba(11,15,18,0.8)] px-8 py-6 sm:px-22.5">
-        <p className="font-montserrat text-sm text-white/60">{t("footer")}</p>
+      <footer className="relative z-10 flex w-full items-center justify-center border-t border-border-subtle bg-surface-overlay px-8 py-6 sm:px-22.5">
+        <p className="text-sm text-white/60">{t("footer")}</p>
       </footer>
     </div>
   );

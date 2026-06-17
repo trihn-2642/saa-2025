@@ -14,7 +14,7 @@ import { cn } from "@/lib/cn";
  * text color when authored as inline SVG with `fill="currentColor"`.
  */
 const buttonVariants = cva(
-  "inline-flex cursor-pointer items-center justify-center rounded-[4px] font-montserrat text-base font-medium transition-colors disabled:cursor-not-allowed disabled:border-transparent disabled:bg-neutral-dark disabled:text-text-primary-2 disabled:shadow-none disabled:hover:bg-neutral-dark [&_img]:size-5 [&_svg]:size-5 [&_svg]:shrink-0",
+  "inline-flex cursor-pointer items-center justify-center rounded-[4px] text-base font-medium transition-colors disabled:cursor-not-allowed disabled:border-transparent disabled:bg-neutral-dark disabled:text-text-primary-2 disabled:shadow-none disabled:hover:bg-neutral-dark [&_img]:size-5 [&_svg]:size-5 [&_svg]:shrink-0",
   {
     variants: {
       variant: {

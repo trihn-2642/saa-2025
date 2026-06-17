@@ -37,9 +37,9 @@ export default function CountdownPage() {
         aria-hidden="true"
       />
 
-      {/* mm:content — placed at ~29% from top (Figma: Countdown time y314/1077),
+      {/* mm:content — placed at 218px + padding top 96px from top (Figma: Countdown time y314/1077),
           horizontally centered, matching the design rather than dead-center. */}
-      <main className="absolute top-[29%] left-1/2 z-10 w-full -translate-x-1/2 px-6">
+      <main className="absolute top-78.5 left-1/2 z-10 w-full -translate-x-1/2 px-6">
         <CountdownTimer
           days={days}
           hours={hours}
