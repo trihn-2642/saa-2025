@@ -11,6 +11,8 @@ import Image from "next/image";
 import IcUp from "@icons/ic-up.svg";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { ROUTES } from "@/lib/routes";
 
 export function KudosSection() {
   const t = useTranslations("homepage");
@@ -33,23 +35,23 @@ export function KudosSection() {
             {/* Left: text content */}
             <div className="flex w-114.25 flex-col gap-4">
               {/* Label */}
-              <p className="text-secondary-1 text-subtitle font-bold">
+              <p className="text-subtitle font-bold text-white">
                 {t("kudosSection.label")}
               </p>
 
               {/* Title */}
-              <h2 className="text-3xl leading-16 font-bold tracking-[-0.25px] text-primary-normal sm:text-4xl lg:text-[57px]">
+              <h2 className="text-title font-bold tracking-[-0.25px] text-primary-normal">
                 {t("kudosSection.title")}
               </h2>
 
               {/* Description */}
-              <p className="text-secondary-1 text-body font-bold tracking-[0.5px] whitespace-break-spaces">
+              <p className="text-body font-bold tracking-[0.5px] whitespace-break-spaces text-white">
                 {t("kudosSection.description")}
               </p>
 
               {/* CTA */}
               <div className="mt-4">
-                <a href="#" className="no-underline">
+                <Link href={ROUTES.home} className="no-underline">
                   <Button
                     variant="primary"
                     className="min-w-31.5 text-body font-bold tracking-[0.15px]"
@@ -57,7 +59,7 @@ export function KudosSection() {
                   >
                     {t("kudosSection.cta")}
                   </Button>
-                </a>
+                </Link>
               </div>
             </div>
 

@@ -14,6 +14,8 @@ import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
+import { ROUTES } from "@/lib/routes";
+import Link from "next/link";
 
 export function SiteFooter() {
   const t = useTranslations("common");
@@ -22,17 +24,37 @@ export function SiteFooter() {
   // Links point to placeholders for now; the link for the current page is
   // active. /home is the "About SAA 2025" landing → first link active there.
   const navLinks = [
-    { label: t("nav.aboutSaa"), href: "#", active: pathname === "/home" },
-    { label: t("nav.awardInfo"), href: "#", active: false },
-    { label: t("nav.kudos"), href: "#", active: false },
-    { label: t("footer.standards"), href: "#", active: false },
+    {
+      label: t("nav.aboutSaa"),
+      href: ROUTES.home,
+      active: pathname === ROUTES.home,
+    },
+    {
+      label: t("nav.awardInfo"),
+      href: ROUTES.awardInformation,
+      active: pathname === ROUTES.awardInformation,
+    },
+    {
+      label: t("nav.kudos"),
+      href: ROUTES.kudos,
+      active: pathname === ROUTES.kudos,
+    },
+    {
+      label: t("footer.standards"),
+      href: "#",
+      active: false,
+    },
   ];
 
   return (
     <footer className="flex h-36 w-full items-center justify-between border-t border-border-subtle bg-details-background px-6 py-10 sm:px-12 lg:px-22.5">
       <div className="flex items-center gap-20">
         {/* Logo */}
-        <a href="#" aria-label={t("aria.logoHome")} className="shrink-0">
+        <Link
+          href={ROUTES.home}
+          aria-label={t("aria.logoHome")}
+          className="shrink-0"
+        >
           <Image
             src="/logo.png"
             alt="Sun* Annual Awards 2025"
@@ -40,12 +62,12 @@ export function SiteFooter() {
             height={64}
             className="h-16 w-auto"
           />
-        </a>
+        </Link>
 
         {/* Nav links — active link highlighted (current page) */}
         <nav className="flex flex-wrap items-center justify-center gap-12">
           {navLinks.map((link) => (
-            <a key={link.label} href={link.href} className="no-underline">
+            <Link key={link.label} href={link.href} className="no-underline">
               <Button
                 type="button"
                 variant="text"
@@ -56,15 +78,13 @@ export function SiteFooter() {
               >
                 {link.label}
               </Button>
-            </a>
+            </Link>
           ))}
         </nav>
       </div>
 
       {/* Copyright */}
-      <p className="text-secondary-1 text-body font-bold">
-        {t("footer.copyright")}
-      </p>
+      <p className="text-body font-bold text-white">{t("footer.copyright")}</p>
     </footer>
   );
 }

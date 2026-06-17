@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { AWARD_CARDS, awardHref } from "@/lib/homepage-content";
+import { AWARD_CARDS } from "@/lib/homepage-content";
 import viMessages from "@/messages/vi.json";
 import enMessages from "@/messages/en.json";
 
@@ -53,15 +53,6 @@ describe("AWARD_CARDS", () => {
       expect(typeof card.image).toBe("string");
       expect(typeof card.href).toBe("string");
     });
-  });
-});
-
-describe("awardHref", () => {
-  it("returns '#' for any slug", () => {
-    expect(awardHref("top-talent")).toBe("#");
-    expect(awardHref("mvp")).toBe("#");
-    expect(awardHref("unknown-award")).toBe("#");
-    expect(awardHref("")).toBe("#");
   });
 });
 

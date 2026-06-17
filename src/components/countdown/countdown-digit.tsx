@@ -33,15 +33,15 @@ export function CountdownDigit({ char, compact }: CountdownDigitProps) {
         className="absolute inset-0 rounded-xl border-[0.75px] border-text-primary-1 opacity-50 backdrop-blur-[49.92px]"
         style={{
           background:
-            "linear-gradient(180deg, var(--text-secondary-1) 0%, color-mix(in srgb, var(--text-secondary-1) 10%, transparent) 100%)",
+            "linear-gradient(180deg, var(--text-white) 0%, color-mix(in srgb, var(--text-white) 10%, transparent) 100%)",
         }}
       />
       {/* lit digit */}
       <span
         className={
           compact
-            ? "relative z-10 font-digital text-5xl leading-none text-text-secondary-1"
-            : "relative z-10 font-digital text-[58px] leading-none text-text-secondary-1 sm:text-[74px]"
+            ? "text-text-white relative z-10 font-digital text-5xl leading-none"
+            : "text-text-white relative z-10 font-digital text-[58px] leading-none sm:text-[74px]"
         }
       >
         {char}

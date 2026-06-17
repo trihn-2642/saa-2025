@@ -60,7 +60,7 @@ export function CountdownTimer({
     <div className="flex flex-col items-center gap-6">
       {/* mm:countdown-title — omitted when title is empty (e.g. homepage hero) */}
       {title ? (
-        <h1 className="text-center text-2xl font-bold text-text-secondary-1 sm:text-4xl">
+        <h1 className="text-text-white text-center text-2xl font-bold sm:text-4xl">
           {title}
         </h1>
       ) : null}

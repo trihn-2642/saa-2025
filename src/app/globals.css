@@ -72,13 +72,16 @@
   --font-digital: var(--font-dseg7), monospace;
 
   /* Type scale (size + paired line-height) — `text-body`, `text-subtitle`,
-     `text-cta`. Replaces repeated `text-[16px] leading-6` etc. */
+     `text-cta`, `text-title`. Replaces repeated `text-[16px] leading-6` etc. */
   --text-body: 16px;
   --text-body--line-height: 24px;
   --text-subtitle: 24px;
   --text-subtitle--line-height: 32px;
   --text-cta: 22px;
   --text-cta--line-height: 28px;
+  /* Big section/page heading — replaces repeated `text-[57px] leading-16`. */
+  --text-title: 57px;
+  --text-title--line-height: 64px;
 
   /* Primary — `bg-primary`, `text-primary-normal`, etc. */
   --color-primary-light: var(--primary-light);
