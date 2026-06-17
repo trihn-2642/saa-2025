@@ -13,21 +13,37 @@ export interface CountdownUnitProps {
   value: string;
   /** Uppercase label, e.g. "DAYS", "HOURS", "MINUTES". */
   label: string;
+  /** Homepage variant: 14px digit↔label gap (default /countdown = 21px). */
+  compact?: boolean;
 }
 
-export function CountdownUnit({ value, label }: CountdownUnitProps) {
+export function CountdownUnit({ value, label, compact }: CountdownUnitProps) {
   const [first, second] = value.padStart(2, "0").slice(0, 2);
 
   return (
     // mm:countdown-unit
-    <div className="flex flex-col items-start gap-5.25">
+    <div
+      className={
+        compact
+          ? "flex flex-col items-start gap-3.5"
+          : "flex flex-col items-start gap-5.25"
+      }
+    >
       {/* mm:digit-row */}
-      <div className="flex flex-row gap-5.25">
-        <CountdownDigit char={first} />
-        <CountdownDigit char={second} />
+      <div
+        className={compact ? "flex flex-row gap-3.5" : "flex flex-row gap-5.25"}
+      >
+        <CountdownDigit char={first} compact={compact} />
+        <CountdownDigit char={second} compact={compact} />
       </div>
       {/* mm:unit-label */}
-      <span className="font-montserrat text-2xl leading-none font-bold text-text-secondary-1 uppercase sm:text-4xl">
+      <span
+        className={
+          compact
+            ? "text-2xl leading-none font-bold text-text-secondary-1 uppercase"
+            : "text-2xl leading-none font-bold text-text-secondary-1 uppercase sm:text-4xl"
+        }
+      >
         {label}
       </span>
     </div>

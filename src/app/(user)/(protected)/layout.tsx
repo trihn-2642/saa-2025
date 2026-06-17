@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import type { ReactNode } from "react";
 import { SiteHeader } from "@/components/layout/site-header";
 import { createClient } from "@/lib/supabase/server";
+import { SiteFooter } from "@/components/layout/site-footer";
 
 /**
  * Layout for all authenticated screens under (protected).
@@ -36,8 +37,12 @@ export default async function ProtectedLayout({
 
   return (
     <div className="min-h-screen bg-details-background text-white">
-      <SiteHeader user={{ name, email, avatarUrl }} />
+      {/* Width is capped to the 1512px design canvas in the root layout. */}
+      <div className="sticky top-0 z-30">
+        <SiteHeader user={{ name, email, avatarUrl }} showNav />
+      </div>
       {children}
+      <SiteFooter />
     </div>
   );
 }

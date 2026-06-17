@@ -30,6 +30,8 @@ export interface CountdownTimerProps {
   hours?: number | string;
   /** Minutes value (0–59); number or pre-padded 2-char string. */
   minutes?: number | string;
+  /** Homepage variant: tighter 14px digit↔label gap. */
+  compact?: boolean;
 }
 
 const DEFAULT_LABELS: CountdownLabels = {
@@ -49,27 +51,46 @@ export function CountdownTimer({
   days = "00",
   hours = "05",
   minutes = "20",
+  compact,
 }: CountdownTimerProps) {
   const fallbackSr = `${pad(days)} days, ${pad(hours)} hours, ${pad(minutes)} minutes remaining`;
 
   return (
     // mm:countdown-timer
     <div className="flex flex-col items-center gap-6">
-      {/* mm:countdown-title */}
-      <h1 className="text-center font-montserrat text-2xl font-bold text-text-secondary-1 sm:text-4xl">
-        {title}
-      </h1>
+      {/* mm:countdown-title — omitted when title is empty (e.g. homepage hero) */}
+      {title ? (
+        <h1 className="text-center text-2xl font-bold text-text-secondary-1 sm:text-4xl">
+          {title}
+        </h1>
+      ) : null}
 
       {/* mm:countdown-units-row */}
       <div
-        className="flex flex-row items-start gap-8 sm:gap-15"
+        className={
+          compact
+            ? "flex flex-row items-start gap-10"
+            : "flex flex-row items-start gap-8 sm:gap-15"
+        }
         role="timer"
         aria-live="off"
       >
         <span className="sr-only">{srText ?? fallbackSr}</span>
-        <CountdownUnit value={pad(days)} label={labels.days} />
-        <CountdownUnit value={pad(hours)} label={labels.hours} />
-        <CountdownUnit value={pad(minutes)} label={labels.minutes} />
+        <CountdownUnit
+          value={pad(days)}
+          label={labels.days}
+          compact={compact}
+        />
+        <CountdownUnit
+          value={pad(hours)}
+          label={labels.hours}
+          compact={compact}
+        />
+        <CountdownUnit
+          value={pad(minutes)}
+          label={labels.minutes}
+          compact={compact}
+        />
       </div>
     </div>
   );

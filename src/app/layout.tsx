@@ -29,7 +29,7 @@ const geistMono = Geist_Mono({
 const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin", "vietnamese"],
-  weight: ["400", "500", "700"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -48,11 +48,18 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} ${dseg7.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} ${dseg7.variable} h-full bg-details-background antialiased`}
     >
-      <body className="min-h-full">
+      {/* suppressHydrationWarning: browser extensions (e.g. ColorZilla's
+          cz-shortcut-listen) inject attributes on <body> before hydration. */}
+      <body
+        className="min-h-full bg-details-background"
+        suppressHydrationWarning
+      >
         <NextIntlClientProvider locale={locale} messages={messages}>
-          {children}
+          {/* Design canvas is a fixed 1512px wide — cap + center every screen
+              so wider displays (e.g. 1920px) show centered content, not stretched. */}
+          <div className="mx-auto w-full max-w-378">{children}</div>
         </NextIntlClientProvider>
       </body>
     </html>

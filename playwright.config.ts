@@ -7,6 +7,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
   reporter: "list",
+  globalSetup: require.resolve("./tests/e2e/auth.setup.ts"),
   use: {
     baseURL: "http://localhost:3000",
     trace: "on-first-retry",
@@ -14,7 +15,13 @@ export default defineConfig({
   projects: [
     {
       name: "chromium",
-      use: { browserName: "chromium", viewport: { width: 1280, height: 800 } },
+      use: {
+        browserName: "chromium",
+        viewport: { width: 1280, height: 800 },
+        // Default context is UNAUTHENTICATED (no storageState). Only the
+        // authenticated /home describe opts into tests/e2e/storageState.json,
+        // so login/countdown specs stay logged-out.
+      },
     },
   ],
   webServer: {

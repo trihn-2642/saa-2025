@@ -1,53 +1,60 @@
-import { getTranslations } from "next-intl/server";
 import Image from "next/image";
-import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
+import { AwardsSection } from "@/components/homepage/awards-section";
+import { Hero } from "@/components/homepage/hero";
+import { KudosSection } from "@/components/homepage/kudos-section";
+import { RootFurther } from "@/components/homepage/root-further";
+import { WidgetButton } from "@/components/homepage/widget-button";
 
 /**
- * /home — protected placeholder proving the auth flow + profile read.
- * Auth + the shared header live in the (protected) layout; this page renders
- * only its own content.
+ * /home — protected Homepage SAA.
+ *
+ * Auth guard, profile read, shared header + footer all live in the
+ * (protected) layout. This page owns only the homepage body composition.
+ *
+ * Hero + RootFurther share one continuous keyvisual background that fades from
+ * the colorful roots (top) down to the solid details-background (bottom), so
+ * the description text sits over a dimmed part of the same image (per design).
  */
-export default async function HomePage() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) redirect("/login");
-
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("full_name, email, avatar_url")
-    .eq("id", user.id)
-    .single();
-
-  const t = await getTranslations("dashboard");
-  const meta = user.user_metadata ?? {};
-  const name =
-    profile?.full_name ?? meta.full_name ?? meta.name ?? user.email ?? "";
-  const email = profile?.email ?? user.email ?? "";
-  const avatarUrl = profile?.avatar_url ?? meta.avatar_url ?? meta.picture;
-
+export default function HomePage() {
   return (
-    <main className="flex flex-col gap-6 px-8 py-16 sm:px-16">
-      <h1 className="font-montserrat text-2xl font-bold">{t("title")}</h1>
-      <div className="flex items-center gap-4">
-        {avatarUrl ? (
-          <Image
-            src={avatarUrl}
-            alt={name}
-            width={48}
-            height={48}
-            className="size-12 rounded-full object-cover"
-          />
-        ) : null}
-        <div className="font-montserrat">
-          <p className="text-lg font-bold">
-            {t("greeting")}, {name}
-          </p>
-          <p className="text-sm text-white/70">{email}</p>
+    <>
+      {/* -mt-20 slides this up behind the sticky header (h-20) so the keyvisual
+          shows through the header's translucent background (per design). */}
+      <div className="relative isolate -mt-20 overflow-hidden bg-details-background">
+        {/* Shared keyvisual — pinned to the top at its natural aspect (not
+            stretched), fading into the solid bg toward the bottom. */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 -z-10">
+          <div className="relative w-full">
+            <Image
+              src="/homepage-saa/keyvisual.jpg"
+              alt=""
+              width={1508}
+              height={1392}
+              sizes="100vw"
+              priority
+              aria-hidden
+              className="h-auto w-full"
+            />
+            {/* Figma "Cover" gradient (node 2167-9029): transparent at the top
+                (keyvisual visible) → solid #00101A toward the bottom. */}
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(to bottom, rgba(0,19,32,0) 51%, rgba(0,18,29,0.462) 64%, rgba(0,16,26,1) 81%)",
+              }}
+              aria-hidden
+            />
+          </div>
         </div>
+
+        <Hero />
+        <RootFurther />
       </div>
-    </main>
+
+      <AwardsSection />
+      <KudosSection />
+      <WidgetButton />
+    </>
   );
 }

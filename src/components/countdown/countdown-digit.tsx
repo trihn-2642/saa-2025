@@ -13,12 +13,20 @@
 export interface CountdownDigitProps {
   /** Single character to display, e.g. "0", "5". */
   char: string;
+  /** Homepage variant: smaller box (51.2×81.92) + font (design 2167-9034). */
+  compact?: boolean;
 }
 
-export function CountdownDigit({ char }: CountdownDigitProps) {
+export function CountdownDigit({ char, compact }: CountdownDigitProps) {
   return (
     // mm:digit-box
-    <div className="relative flex h-24 w-15 items-center justify-center sm:h-30.75 sm:w-19.25">
+    <div
+      className={
+        compact
+          ? "relative flex h-20.5 w-12.75 items-center justify-center"
+          : "relative flex h-24 w-15 items-center justify-center sm:h-30.75 sm:w-19.25"
+      }
+    >
       {/* translucent gradient box (design opacity 0.5) */}
       <span
         aria-hidden="true"
@@ -29,7 +37,13 @@ export function CountdownDigit({ char }: CountdownDigitProps) {
         }}
       />
       {/* lit digit */}
-      <span className="relative z-10 font-digital text-[58px] leading-none text-text-secondary-1 sm:text-[74px]">
+      <span
+        className={
+          compact
+            ? "relative z-10 font-digital text-5xl leading-none text-text-secondary-1"
+            : "relative z-10 font-digital text-[58px] leading-none text-text-secondary-1 sm:text-[74px]"
+        }
+      >
         {char}
       </span>
     </div>
