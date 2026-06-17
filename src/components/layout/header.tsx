@@ -7,6 +7,8 @@ import IcUserProfile from "@icons/ic-user-profile.svg";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+
 import {
   Dropdown,
   DropdownItem,
@@ -14,6 +16,7 @@ import {
   type DropdownOption,
 } from "@/components/ui/dropdown";
 import { cn } from "@/lib/cn";
+import { ROUTES } from "@/lib/routes";
 
 export interface HeaderUser {
   name: string;
@@ -55,11 +58,11 @@ function NavLinks({ links }: { links: NavLink[] }) {
   return (
     <nav className="hidden items-center gap-8 lg:flex">
       {links.map((link) => (
-        <a
+        <Link
           key={link.href + link.label}
           href={link.href}
           className={cn(
-            "group relative py-2 text-[16px] font-bold tracking-[0.15px] no-underline transition-colors",
+            "group relative h-14 p-4 text-[16px] font-bold tracking-[0.15px] no-underline transition-colors",
             link.selected
               ? "text-primary-normal [text-shadow:0_0_8px_var(--button-glow)]"
               : "text-white hover:text-primary-normal",
@@ -76,7 +79,7 @@ function NavLinks({ links }: { links: NavLink[] }) {
                 : "scale-x-0 group-hover:scale-x-100",
             )}
           />
-        </a>
+        </Link>
       ))}
     </nav>
   );
@@ -192,13 +195,13 @@ export function Header({
       {/* Left: logo + nav */}
       <div className="flex items-center gap-16">
         {hasNav ? (
-          <a
-            href="#"
+          <Link
+            href={ROUTES.home}
             aria-label={t("aria.logoHome")}
             className="flex items-center"
           >
             {logo}
-          </a>
+          </Link>
         ) : (
           <div className="flex items-center">{logo}</div>
         )}

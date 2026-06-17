@@ -19,14 +19,14 @@ export function AwardsSection() {
     <section className="w-full bg-details-background px-6 pt-6 sm:px-12 lg:px-36 lg:pt-30">
       <div>
         {/* Caption */}
-        <p className="text-secondary-1 text-subtitle font-bold uppercase">
+        <p className="text-subtitle font-bold text-white uppercase">
           {t("awards.caption")}
         </p>
 
         <span className="my-4 block h-px w-full bg-border-subtle" />
 
         {/* Section title */}
-        <h2 className="mb-20 text-3xl leading-16 font-bold tracking-[-0.25px] text-primary-normal sm:text-4xl lg:text-[57px]">
+        <h2 className="mb-20 text-title font-bold tracking-[-0.25px] text-primary-normal">
           {t("awards.title")}
         </h2>
 

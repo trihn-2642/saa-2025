@@ -17,6 +17,8 @@ import { CountdownTimer } from "@/components/countdown/countdown-timer";
 import { Button } from "@/components/ui/button";
 import { useCountdown } from "@/hooks/use-countdown";
 import { cn } from "@/lib/cn";
+import Link from "next/link";
+import { ROUTES } from "@/lib/routes";
 
 export interface HeroProps {
   className?: string;
@@ -88,7 +90,7 @@ export function Hero({ className }: HeroProps) {
 
         {/* CTA buttons — with ↗ arrow */}
         <div className="mt-10 flex flex-wrap gap-10">
-          <a href="#" className="no-underline">
+          <Link href={ROUTES.awardInformation} className="no-underline">
             <Button
               variant="primary"
               iconRight={<IcUp aria-hidden className="size-6!" />}
@@ -96,8 +98,8 @@ export function Hero({ className }: HeroProps) {
             >
               {t("hero.ctaAwards")}
             </Button>
-          </a>
-          <a href="#" className="no-underline">
+          </Link>
+          <Link href={ROUTES.kudos} className="no-underline">
             <Button
               variant="secondary"
               iconRight={<IcUp aria-hidden className="size-6!" />}
@@ -105,7 +107,7 @@ export function Hero({ className }: HeroProps) {
             >
               {t("hero.ctaKudos")}
             </Button>
-          </a>
+          </Link>
         </div>
       </div>
     </section>

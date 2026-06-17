@@ -10,6 +10,7 @@ import IcUp from "@icons/ic-up.svg";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
+import Link from "next/link";
 
 export interface AwardCardProps {
   /** Absolute path from public/ root, e.g. /awards/top-talent.png */
@@ -58,11 +59,11 @@ export function AwardCard({
         {title}
       </h3>
 
-      <p className="text-secondary-1 mt-1 text-body tracking-[0.5px]">
+      <p className="mt-1 text-body tracking-[0.5px] text-white">
         {description}
       </p>
 
-      <a href={href} className="inline-block no-underline">
+      <Link href={href} className="inline-block no-underline">
         <Button
           type="button"
           variant="text"
@@ -71,7 +72,7 @@ export function AwardCard({
         >
           {detailLabel}
         </Button>
-      </a>
+      </Link>
     </article>
   );
 }

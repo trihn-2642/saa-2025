@@ -19,7 +19,6 @@ export interface AwardCard {
   /**
    * Card link target.
    * Currently "#" (placeholder per clarifications decision 1).
-   * Future: `/award-information#${slug}` — use awardHref() for forward-compat.
    */
   href: string;
 }
@@ -72,17 +71,3 @@ export const AWARD_CARDS: AwardCard[] = [
     href: "#",
   },
 ];
-
-/**
- * Returns the href for a given award slug.
- *
- * Currently returns "#" for all slugs (placeholder per clarifications decision 1).
- * Future implementation: return `/award-information#${slug}` once that page exists.
- *
- * Unit-testable: pure function with no side effects.
- */
-export function awardHref(slug: string): string {
-  // Future: return `/award-information#${slug}`;
-  void slug;
-  return "#";
-}

@@ -9,6 +9,7 @@ import {
   type NavLink,
 } from "@/components/layout/header";
 import { createClient } from "@/lib/supabase/client";
+import { ROUTES } from "@/lib/routes";
 
 /**
  * Client wrapper around <Header> that wires real behaviours (language switch
@@ -39,7 +40,7 @@ export function SiteHeader({
 
   const onLogout = async () => {
     await createClient().auth.signOut();
-    router.push("/login");
+    router.push(ROUTES.login);
     router.refresh();
   };
 
@@ -48,9 +49,21 @@ export function SiteHeader({
   // landing → first link active there. Default (no showNav) → no nav.
   const nav: NavLink[] | undefined = showNav
     ? [
-        { label: t("nav.aboutSaa"), href: "#", selected: pathname === "/home" },
-        { label: t("nav.awardInfo"), href: "#", selected: false },
-        { label: t("nav.kudos"), href: "#", selected: false },
+        {
+          label: t("nav.aboutSaa"),
+          href: ROUTES.home,
+          selected: pathname === ROUTES.home,
+        },
+        {
+          label: t("nav.awardInfo"),
+          href: ROUTES.awardInformation,
+          selected: pathname === ROUTES.awardInformation,
+        },
+        {
+          label: t("nav.kudos"),
+          href: ROUTES.kudos,
+          selected: pathname === ROUTES.kudos,
+        },
       ]
     : undefined;
 
