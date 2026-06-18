@@ -1,35 +1,37 @@
 "use client";
 
-import { useState, useCallback, useTransition } from "react";
+import { useCallback, useState, useTransition } from "react";
+
+import {
+  fetchFeed,
+  fetchHighlight,
+  openSecretBox,
+  toggleLike,
+} from "@/app/(user)/(protected)/kudos/actions";
+import {
+  mapDepartmentOptions,
+  mapGiftRecipients,
+  mapHashtagOptions,
+  mapRankUps,
+  mapSidebarStats,
+  mapSpotlightEntries,
+  mapToCardProps,
+} from "@/lib/kudos/mappers";
+import type {
+  DepartmentOption,
+  Filters,
+  GiftRecipientEntry,
+  HashtagOption,
+  KudosCard as KudosCardType,
+  ProfileStats,
+  RankUpEntry,
+  SpotlightData,
+} from "@/lib/kudos/types";
+
+import { AllKudos } from "./all-kudos";
 import { KudosBanner } from "./kudos-banner";
 import { KudosHighlight } from "./kudos-highlight";
 import { SpotlightBoard } from "./spotlight-board";
-import { AllKudos } from "./all-kudos";
-import {
-  mapToCardProps,
-  mapHashtagOptions,
-  mapDepartmentOptions,
-  mapRankUps,
-  mapGiftRecipients,
-  mapSpotlightEntries,
-  mapSidebarStats,
-} from "@/lib/kudos/mappers";
-import type {
-  ProfileStats,
-  RankUpEntry,
-  GiftRecipientEntry,
-  SpotlightData,
-  HashtagOption,
-  DepartmentOption,
-  Filters,
-  KudosCard as KudosCardType,
-} from "@/lib/kudos/types";
-import {
-  toggleLike,
-  openSecretBox,
-  fetchFeed,
-  fetchHighlight,
-} from "@/app/(user)/(protected)/kudos/actions";
 
 // ── Props ─────────────────────────────────────────────────────────────────────
 

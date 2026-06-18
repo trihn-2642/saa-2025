@@ -1,8 +1,5 @@
 "use client";
 
-import IcDown from "@icons/ic-down.svg";
-import IcRight from "@icons/ic-right.svg";
-import { type VariantProps, cva } from "class-variance-authority";
 import {
   type ButtonHTMLAttributes,
   type HTMLAttributes,
@@ -12,6 +9,11 @@ import {
   useRef,
   useState,
 } from "react";
+import { cva, type VariantProps } from "class-variance-authority";
+
+import IcDown from "@icons/ic-down.svg";
+import IcRight from "@icons/ic-right.svg";
+
 import { Button, type ButtonProps } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
 

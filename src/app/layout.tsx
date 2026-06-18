@@ -1,9 +1,10 @@
+import "./globals.css";
+
 import type { Metadata } from "next";
-import { NextIntlClientProvider } from "next-intl";
-import { getLocale, getMessages } from "next-intl/server";
 import { Geist, Geist_Mono, Montserrat } from "next/font/google";
 import localFont from "next/font/local";
-import "./globals.css";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
 
 // Self-hosted LED 7-segment font (preloaded, no FOUT) — stands in for the
 // design's "Digital Numbers" font.

@@ -8,21 +8,22 @@
  */
 
 import { createClient } from "@/lib/supabase/server";
-import { starsFromReceived, badgeFromSenders } from "./badges";
+
+import { badgeFromSenders, starsFromReceived } from "./badges";
 import type {
-  KudosCard,
-  Profile,
-  ProfileStats,
-  SpotlightData,
-  Leaderboards,
-  RankUpEntry,
+  Badge,
+  DepartmentOption,
+  Filters,
   GiftRecipientEntry,
   HashtagOption,
-  DepartmentOption,
+  KudosCard,
+  Leaderboards,
   PaginatedResult,
-  Filters,
+  Profile,
+  ProfileStats,
+  RankUpEntry,
+  SpotlightData,
   Stars,
-  Badge,
 } from "./types";
 
 // ── Internal helpers ───────────────────────────────────────────────────────────

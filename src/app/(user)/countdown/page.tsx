@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+
 import { CountdownTimer } from "@/components/countdown/countdown-timer";
 import { useCountdown } from "@/hooks/use-countdown";
 
@@ -22,7 +23,7 @@ export default function CountdownPage() {
       {/* mm:bg-image — Figma background asset (1512×1077). */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/countdown/bg-prelaunch.png')" }}
+        style={{ backgroundImage: "url('/images/countdown/bg-prelaunch.png')" }}
         aria-hidden="true"
       />
       {/* mm:bg-overlay — Figma "Cover" gradient (details-background → #00121D 46%

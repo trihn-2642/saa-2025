@@ -1,5 +1,6 @@
+import { type NextRequest, NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
-import { NextResponse, type NextRequest } from "next/server";
+
 import { decideRedirect } from "@/lib/auth/route-guard";
 
 /** Refresh the Supabase session cookie and enforce route protection. */

@@ -1,4 +1,5 @@
 import type { NextRequest } from "next/server";
+
 import { updateSession } from "@/lib/supabase/middleware";
 
 // Next 16 renamed `middleware` → `proxy` (runs on the Node.js runtime).

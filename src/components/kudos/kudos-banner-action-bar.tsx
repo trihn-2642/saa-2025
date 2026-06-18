@@ -1,7 +1,9 @@
 "use client";
 
-import IcPen from "@icons/ic-pen.svg";
 import { useTranslations } from "next-intl";
+
+import IcPen from "@icons/ic-pen.svg";
+
 import { Button } from "@/components/ui/button";
 import { SearchInput } from "@/components/ui/search-input";
 

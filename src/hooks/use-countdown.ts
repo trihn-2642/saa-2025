@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import {
+  type FormattedCountdown,
   getCountdownTargetMs,
   getFormattedCountdown,
-  type FormattedCountdown,
 } from "@/lib/countdown";
 
 /**

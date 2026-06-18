@@ -1,6 +1,7 @@
 "use client";
 
 import IcTarget from "@icons/ic-target.svg";
+
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
 

@@ -2,7 +2,9 @@
 
 import type { ReactNode } from "react";
 import { useTranslations } from "next-intl";
+
 import { cn } from "@/lib/cn";
+
 import { BadgeChip, type BadgeTier } from "./badge-chip";
 
 export interface BadgeTooltipProps {

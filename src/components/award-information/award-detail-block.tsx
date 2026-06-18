@@ -1,7 +1,8 @@
+import Image from "next/image";
+
 import IcDiamond from "@icons/ic-diamond.svg";
 import IcLicense from "@icons/ic-license.svg";
 import IcTarget from "@icons/ic-target.svg";
-import Image from "next/image";
 
 export interface AwardValue {
   /** Prize amount string, e.g. "7.000.000 VNĐ" */
@@ -13,7 +14,7 @@ export interface AwardValue {
 export interface AwardDetailBlockProps {
   /** URL-safe slug, also used as the scroll-spy anchor id */
   slug: string;
-  /** Absolute path from public/ root, e.g. /awards/top-talent.png */
+  /** Absolute path from public/ root, e.g. /images/awards/top-talent.png */
   imageSrc: string;
   /** Descriptive alt text for the award orb image */
   imageAlt: string;

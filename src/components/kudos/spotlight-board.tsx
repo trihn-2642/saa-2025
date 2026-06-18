@@ -1,12 +1,15 @@
 "use client";
 
-import IcPanZoom from "@icons/ic-pan-zoom.svg";
-import Image from "next/image";
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { cn } from "@/lib/cn";
+
+import IcPanZoom from "@icons/ic-pan-zoom.svg";
+
 import { Button } from "@/components/ui/button";
 import { SearchInput } from "@/components/ui/search-input";
+import { cn } from "@/lib/cn";
+
 import { KudosSectionHeader } from "./kudos-section-header";
 
 export interface SpotlightEntry {
@@ -124,7 +127,7 @@ export function SpotlightBoard({
       {/* Board panel */}
       <div className="relative h-137 w-full overflow-hidden rounded-[47.14px] border border-primary-dark-hover bg-[#000000B2]">
         <Image
-          src="/kudos-live-board/constellation.png"
+          src="/images/kudos-live-board/constellation.png"
           alt=""
           aria-hidden
           fill
@@ -137,7 +140,7 @@ export function SpotlightBoard({
             constellation). Softened + faded toward the right so it stays on the
             left and the constellation reads through instead of being covered. */}
         <Image
-          src="/kudos-live-board/ribbon.png"
+          src="/images/kudos-live-board/ribbon.png"
           alt=""
           aria-hidden
           width={1819}

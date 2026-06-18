@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { decideRedirect } from "@/lib/auth/route-guard";
 
 describe("decideRedirect", () => {

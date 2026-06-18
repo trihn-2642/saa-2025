@@ -1,8 +1,9 @@
 // @vitest-environment jsdom
 import { act, renderHook } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { getFormattedCountdown } from "@/lib/countdown";
+
 import { useCountdown } from "@/hooks/use-countdown";
+import { getFormattedCountdown } from "@/lib/countdown";
 
 /**
  * useCountdown — real behaviour test (jsdom + fake timers).

@@ -1,20 +1,21 @@
 import { describe, expect, it } from "vitest";
+
 import {
   formatKudosDate,
-  mapToCardProps,
-  mapHashtagOptions,
   mapDepartmentOptions,
-  mapRankUps,
   mapGiftRecipients,
-  mapSpotlightEntries,
+  mapHashtagOptions,
+  mapRankUps,
   mapSidebarStats,
+  mapSpotlightEntries,
+  mapToCardProps,
 } from "@/lib/kudos/mappers";
 import type {
-  KudosCard,
-  RankUpEntry,
   GiftRecipientEntry,
-  SpotlightData,
+  KudosCard,
   ProfileStats,
+  RankUpEntry,
+  SpotlightData,
 } from "@/lib/kudos/types";
 
 /**

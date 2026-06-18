@@ -1,17 +1,20 @@
 "use client";
 
+import { useState } from "react";
+import Image from "next/image";
+import { useTranslations } from "next-intl";
+
 import IcHeart from "@icons/ic-heart.svg";
 import IcLink from "@icons/ic-link.svg";
 import IcPen from "@icons/ic-pen.svg";
 import IcSend from "@icons/ic-send.svg";
 import IcUp from "@icons/ic-up.svg";
-import Image from "next/image";
-import { useState } from "react";
-import { useTranslations } from "next-intl";
+
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
-import { BadgeChip } from "./badge-chip";
+
 import type { BadgeTier } from "./badge-chip";
+import { BadgeChip } from "./badge-chip";
 import { BadgeTooltip } from "./badge-tooltip";
 import { HoverProfileCard } from "./hover-profile-card";
 

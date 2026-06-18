@@ -1,9 +1,10 @@
 import { describe, expect, it } from "vitest";
+
 import {
-  FALLBACK_TARGET_ISO,
   clampDays,
   clampUnit,
   computeCountdown,
+  FALLBACK_TARGET_ISO,
   formatTwoDigits,
   getCountdownTargetMs,
   getFormattedCountdown,

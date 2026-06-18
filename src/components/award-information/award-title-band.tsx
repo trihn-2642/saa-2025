@@ -1,7 +1,7 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 export function AwardTitleBand() {
   const t = useTranslations("awardInfo.titleBand");
@@ -11,7 +11,7 @@ export function AwardTitleBand() {
       {/* Cover band keeps the design's 1440×548 proportion. */}
       <div className="relative aspect-1440/548 h-136.75 w-full">
         <Image
-          src="/award-information/background.jpg"
+          src="/images/award-information/background.jpg"
           alt=""
           fill
           priority
@@ -34,7 +34,7 @@ export function AwardTitleBand() {
         <div className="absolute inset-0 flex flex-col gap-30 px-6 pt-24 lg:px-36">
           {/* ROOT FURTHER lockup (reused stylized wordmark). */}
           <Image
-            src="/login/root-further.png"
+            src="/images/login/root-further.png"
             alt="ROOT FURTHER"
             width={451}
             height={200}

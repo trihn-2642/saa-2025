@@ -1,7 +1,9 @@
 "use client";
 
-import IcSearch from "@icons/ic-search.svg";
 import type { InputHTMLAttributes } from "react";
+
+import IcSearch from "@icons/ic-search.svg";
+
 import { cn } from "@/lib/cn";
 
 export interface SearchInputProps extends Omit<

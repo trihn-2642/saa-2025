@@ -1,12 +1,15 @@
 "use client";
 
-import IcPen from "@icons/ic-pen.svg";
 import { type ReactNode, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTranslations } from "next-intl";
+
+import IcPen from "@icons/ic-pen.svg";
+
 import { fetchProfileCard } from "@/app/(user)/(protected)/kudos/actions";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
+
 import { BadgeChip } from "./badge-chip";
 
 type ProfileCardData = Awaited<ReturnType<typeof fetchProfileCard>>;

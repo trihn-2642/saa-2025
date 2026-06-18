@@ -9,7 +9,9 @@
  */
 
 import { useTranslations } from "next-intl";
+
 import { AWARD_CARDS } from "@/lib/homepage-content";
+
 import { AwardCard } from "./award-card";
 
 export function AwardsSection() {

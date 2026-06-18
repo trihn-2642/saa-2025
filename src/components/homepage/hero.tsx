@@ -3,21 +3,23 @@
 /**
  * Hero — full-viewport hero section of the Homepage SAA.
  *
- * Background: /homepage-saa/keyvisual.jpg (colorful root art) with a
+ * Background: /images/homepage-saa/keyvisual.jpg (colorful root art) with a
  * left→right dark gradient so the left content column is readable.
  * The "ROOT FURTHER" title uses the stylized lockup image (matches the design's
  * custom display font). Countdown driven live by useCountdown(); the "Comming
  * soon" subtitle hides once the event has passed.
  */
 
-import IcUp from "@icons/ic-up.svg";
-import { useTranslations } from "next-intl";
 import Image from "next/image";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
+
+import IcUp from "@icons/ic-up.svg";
+
 import { CountdownTimer } from "@/components/countdown/countdown-timer";
 import { Button } from "@/components/ui/button";
 import { useCountdown } from "@/hooks/use-countdown";
 import { cn } from "@/lib/cn";
-import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
 
 export interface HeroProps {
@@ -37,7 +39,7 @@ export function Hero({ className }: HeroProps) {
         {/* "ROOT FURTHER" headline — stylized lockup (custom display font) */}
         <h1>
           <Image
-            src="/login/root-further.png"
+            src="/images/login/root-further.png"
             alt="ROOT FURTHER"
             width={451}
             height={200}
