@@ -92,7 +92,7 @@ export function AwardDetailBlock({
               {quantityLabel}
             </p>
             <p className="flex items-center gap-2">
-              <span className="text-[36px] leading-11 font-bold text-white">
+              <span className="text-heading font-bold text-white">
                 {quantity}
               </span>
               <span className="w-15 text-sm font-bold tracking-[0.1px] text-white">
@@ -114,7 +114,7 @@ export function AwardDetailBlock({
                   </p>
                 </div>
 
-                <span className="text-[36px] leading-11 font-bold text-white">
+                <span className="text-heading font-bold text-white">
                   {v.amount}
                 </span>
                 {v.note && (

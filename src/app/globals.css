@@ -50,6 +50,7 @@
   ); /* FFEA9E @ 40% (secondary hover) */
   --button-normal: rgba(255, 234, 158, 0); /* FFEA9E @ 0% */
   --button-glow: #fae287; /* hover glow color */
+  --error: #d4271d; /* error state (e.g. form validation) */
 
   /* Surfaces & accents (reusable) */
   --surface-overlay: #0b0f12cc;
@@ -79,6 +80,9 @@
   --text-subtitle--line-height: 32px;
   --text-cta: 22px;
   --text-cta--line-height: 28px;
+  /* Mid heading — replaces repeated `text-[36px] leading-11`. */
+  --text-heading: 36px;
+  --text-heading--line-height: 44px;
   /* Big section/page heading — replaces repeated `text-[57px] leading-16`. */
   --text-title: 57px;
   --text-title--line-height: 64px;
@@ -118,6 +122,7 @@
   --color-button-hover: var(--button-hover);
   --color-button-hover-strong: var(--button-hover-strong);
   --color-button-normal: var(--button-normal);
+  --color-error: var(--error);
 
   /* Surfaces & accents — `bg-surface-overlay`, `text-sun-red`, `bg-danger`, … */
   --color-surface-overlay: var(--surface-overlay);
@@ -130,6 +135,16 @@
   /* Hover glow — `shadow-button-glow` */
   --shadow-button-glow:
     0 0 6px var(--button-glow), 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Gold glow on the CONTENT (not a box-shadow). `text-shadow-glow` for text,
+   `drop-shadow-glow` for icons/SVGs. Pair with a variant, e.g. `hover:text-shadow-glow`. */
+@utility text-shadow-glow {
+  text-shadow: var(--shadow-button-glow);
+}
+@utility drop-shadow-glow {
+  filter: drop-shadow(0 0 6px var(--button-glow))
+    drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 @media (prefers-color-scheme: dark) {

@@ -101,6 +101,110 @@
       "writeKudos": "Viết KUDOS"
     }
   },
+  "kudos": {
+    "banner": {
+      "title": "Hệ thống ghi nhận lời cảm ơn"
+    },
+    "submit": {
+      "placeholder": "Hôm nay, bạn muốn gửi lời cảm ơn và ghi nhận đến ai?",
+      "cta": "Gửi Kudos",
+      "dialogTitle": "Gửi lời cảm ơn",
+      "receiverLabel": "Người nhận",
+      "receiverPlaceholder": "Tìm kiếm Sunner...",
+      "messageLabel": "Lời nhắn",
+      "messagePlaceholder": "Viết lời cảm ơn của bạn...",
+      "hashtagLabel": "Hashtag",
+      "imageLabel": "Ảnh đính kèm (tùy chọn)",
+      "chooseImage": "Chọn ảnh",
+      "imagesSelected": "{count} ảnh đã chọn",
+      "cancel": "Huỷ",
+      "confirm": "Gửi"
+    },
+    "search": {
+      "placeholder": "Tìm kiếm profile Sunner"
+    },
+    "highlight": {
+      "subtitle": "Sun* Annual Awards 2025",
+      "title": "Kudos được yêu thích nhất"
+    },
+    "allKudos": {
+      "subtitle": "Tất cả",
+      "title": "Tất cả Kudos"
+    },
+    "spotlight": {
+      "title": "Spotlight — Những Sunner được ghi nhận",
+      "search": "Tìm kiếm",
+      "activitySuffix": "đã nhận được một Kudos mới",
+      "expand": "Mở rộng bảng"
+    },
+    "filters": {
+      "hashtag": "Hashtag",
+      "department": "Phòng ban"
+    },
+    "card": {
+      "copyLink": "Sao chép liên kết",
+      "viewDetail": "Xem chi tiết",
+      "edit": "Chỉnh sửa kudos",
+      "sent": "đã gửi đến"
+    },
+    "toast": {
+      "linkCopied": "Link copied — ready to share!"
+    },
+    "empty": {
+      "noKudos": "Hiện tại chưa có Kudos nào.",
+      "noData": "Chưa có dữ liệu"
+    },
+    "feed": {
+      "loadingMore": "Đang tải thêm..."
+    },
+    "sidebar": {
+      "received": "Số Kudos bạn nhận được:",
+      "sent": "Số Kudos bạn đã gửi:",
+      "hearts": "Số tim bạn nhận được:",
+      "secretOpened": "Số Secret Box bạn đã mở:",
+      "secretUnopened": "Số Secret Box chưa mở:",
+      "openGift": "Mở Secret Box",
+      "rankUps": "10 SUNNER\nTHĂNG HẠNG",
+      "giftRecipients": "10 SUNNER NHẬN QUÀ\nMỚI NHẤT",
+      "campaign": {
+        "title": "Ngày x2 tim – lan tỏa gấp đôi yêu thương!",
+        "desc": "Từ 00:00 ngày 20/12 đến 23:59 ngày 25/12, tất cả tim bạn nhận được đều được nhân đôi."
+      }
+    },
+    "hoverCard": {
+      "unit": "Tên đơn vị:",
+      "received": "Số Kudos nhận được:",
+      "sent": "Số Kudos đã gửi:",
+      "cta": "Gửi KUDO"
+    },
+    "badge": {
+      "new": {
+        "title": "Có 1–4 người gửi Kudos cho bạn",
+        "desc": "Hành trình lan tỏa điều tốt đẹp bắt đầu – những lời cảm ơn và ghi nhận đầu tiên đã tìm đến bạn."
+      },
+      "rising": {
+        "title": "Có 5-9 người gửi Kudos cho bạn",
+        "desc": "Hình ảnh bạn đang lớn dần trong trái tim đồng đội bằng sự tử tế và cống hiến của mình."
+      },
+      "super": {
+        "title": "Có 10–20 người gửi Kudos cho bạn",
+        "desc": "Bạn đã trở thành biểu tượng được tin tưởng và yêu quý, người luôn sẵn sàng hỗ trợ và được nhiều đồng đội nhớ đến."
+      },
+      "legend": {
+        "title": "Có hơn 20 người gửi Kudos cho bạn",
+        "desc": "Bạn đã trở thành huyền thoại – người để lại dấu ấn khó quên trong tập thể bằng trái tim và hành động của mình."
+      },
+      "campaign": {
+        "title": "Campaign x2",
+        "desc": "Trong thời gian diễn ra sự kiện đặc biệt, mỗi lượt tim bạn nhận được có giá trị gấp đôi (x2 hearts)."
+      }
+    },
+    "stars": {
+      "one": "Bạn đã nhận được từ 10 Kudos trở lên. Tiếp tục phát huy!",
+      "two": "Bạn đã nhận được từ 20 Kudos trở lên. Bạn đang toả sáng!",
+      "three": "Bạn đã nhận được từ 50 Kudos trở lên. Bạn là ngôi sao của Sun*!"
+    }
+  },
   "awardInfo": {
     "titleBand": {
       "caption": "Sun* Annual Awards 2025",

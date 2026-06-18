@@ -73,7 +73,7 @@ export function SiteFooter() {
                 variant="text"
                 className={cn(
                   "text-body font-bold tracking-[0.15px]",
-                  link.active && "bg-button-hover",
+                  link.active && "bg-button-hover text-shadow-glow",
                 )}
               >
                 {link.label}
