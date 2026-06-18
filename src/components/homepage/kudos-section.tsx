@@ -68,9 +68,9 @@ export function KudosSection() {
               <Image
                 src="/kudos-logo.png"
                 alt="Sun* Kudos"
-                width={364}
-                height={72}
-                className="h-auto w-48 sm:w-64 lg:h-18 lg:w-91"
+                width={714}
+                height={147}
+                className="h-auto w-48 sm:w-64 lg:w-91"
               />
             </div>
           </div>

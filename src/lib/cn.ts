@@ -4,7 +4,7 @@ import { extendTailwindMerge } from "tailwind-merge";
 /**
  * tailwind-merge configured with our custom theme tokens so it resolves
  * conflicts correctly:
- *  - `text-body` / `text-subtitle` / `text-cta` / `text-title` are FONT SIZES
+ *  - `text-body` / `text-subtitle` / `text-cta` / `text-heading` / `text-title` are FONT SIZES
  *    (from @theme), not colors — otherwise twMerge treats `text-cta` as a
  *    text-color and drops the variant's `text-text-primary-2`, turning button
  *    text white.
@@ -12,7 +12,7 @@ import { extendTailwindMerge } from "tailwind-merge";
 const twMerge = extendTailwindMerge({
   extend: {
     classGroups: {
-      "font-size": [{ text: ["body", "subtitle", "cta", "title"] }],
+      "font-size": [{ text: ["body", "subtitle", "cta", "heading", "title"] }],
     },
   },
 });

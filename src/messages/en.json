@@ -101,6 +101,110 @@
       "writeKudos": "Write KUDOS"
     }
   },
+  "kudos": {
+    "banner": {
+      "title": "Recognition & Appreciation System"
+    },
+    "submit": {
+      "placeholder": "Who would you like to thank and recognize today?",
+      "cta": "Send Kudos",
+      "dialogTitle": "Send appreciation",
+      "receiverLabel": "Recipient",
+      "receiverPlaceholder": "Search for a Sunner...",
+      "messageLabel": "Message",
+      "messagePlaceholder": "Write your thanks...",
+      "hashtagLabel": "Hashtag",
+      "imageLabel": "Attachments (optional)",
+      "chooseImage": "Choose images",
+      "imagesSelected": "{count} image(s) selected",
+      "cancel": "Cancel",
+      "confirm": "Send"
+    },
+    "search": {
+      "placeholder": "Search Sunner profile"
+    },
+    "highlight": {
+      "subtitle": "Sun* Annual Awards 2025",
+      "title": "Most loved Kudos"
+    },
+    "allKudos": {
+      "subtitle": "All",
+      "title": "All Kudos"
+    },
+    "spotlight": {
+      "title": "Spotlight — Recognized Sunners",
+      "search": "Search",
+      "activitySuffix": "received a new Kudos",
+      "expand": "Expand board"
+    },
+    "filters": {
+      "hashtag": "Hashtag",
+      "department": "Department"
+    },
+    "card": {
+      "copyLink": "Copy link",
+      "viewDetail": "View detail",
+      "edit": "Edit kudos",
+      "sent": "sent to"
+    },
+    "toast": {
+      "linkCopied": "Link copied — ready to share!"
+    },
+    "empty": {
+      "noKudos": "No Kudos yet.",
+      "noData": "No data available"
+    },
+    "feed": {
+      "loadingMore": "Loading more..."
+    },
+    "sidebar": {
+      "received": "Kudos received:",
+      "sent": "Kudos sent:",
+      "hearts": "Hearts received:",
+      "secretOpened": "Secret Boxes opened:",
+      "secretUnopened": "Secret Boxes unopened:",
+      "openGift": "Open Secret Box",
+      "rankUps": "TOP 10 SUNNERS\nRANK UP",
+      "giftRecipients": "TOP 10 SUNNERS\nLATEST GIFTS",
+      "campaign": {
+        "title": "Double-hearts day – spread twice the love!",
+        "desc": "From 00:00 on 20/12 to 23:59 on 25/12, every heart you receive is doubled."
+      }
+    },
+    "hoverCard": {
+      "unit": "Department:",
+      "received": "Kudos received:",
+      "sent": "Kudos sent:",
+      "cta": "Send KUDO"
+    },
+    "badge": {
+      "new": {
+        "title": "1–4 people sent you Kudos",
+        "desc": "The journey of spreading good things begins — the first words of thanks and recognition have found you."
+      },
+      "rising": {
+        "title": "5–9 people sent you Kudos",
+        "desc": "Your presence is growing in your teammates' hearts through your kindness and dedication."
+      },
+      "super": {
+        "title": "10–20 people sent you Kudos",
+        "desc": "You've become a trusted and beloved icon — always ready to help and remembered by many teammates."
+      },
+      "legend": {
+        "title": "More than 20 people sent you Kudos",
+        "desc": "You've become a legend — leaving an unforgettable mark on the team through your heart and actions."
+      },
+      "campaign": {
+        "title": "Campaign x2",
+        "desc": "During the special campaign period, every heart you receive is worth double (x2 hearts)."
+      }
+    },
+    "stars": {
+      "one": "You have received 10 or more Kudos. Keep it up!",
+      "two": "You have received 20 or more Kudos. You are shining!",
+      "three": "You have received 50 or more Kudos. You are a Sun* star!"
+    }
+  },
   "awardInfo": {
     "titleBand": {
       "caption": "Sun* Annual Awards 2025",

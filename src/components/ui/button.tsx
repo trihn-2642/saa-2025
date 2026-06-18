@@ -22,8 +22,9 @@ const buttonVariants = cva(
           "gap-2 bg-primary-normal px-4 py-4 text-text-primary-2 hover:bg-primary-light-active hover:shadow-button-glow",
         secondary:
           "gap-2 border border-primary-dark-hover bg-button-hover px-4 py-4 text-white hover:bg-button-hover-strong hover:shadow-button-glow",
-        text: "gap-1 px-4 py-4 hover:bg-button-hover",
-        icon: "size-10 p-2.5 hover:bg-button-hover",
+        // Glow sits on the content: text-shadow on the label, drop-shadow on the icon.
+        text: "gap-1 px-4 py-4 hover:bg-button-hover hover:text-shadow-glow",
+        icon: "size-10 p-2.5 hover:bg-button-hover hover:drop-shadow-glow",
       },
       selected: { true: "", false: "" },
     },
