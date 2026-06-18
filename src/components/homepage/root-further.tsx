@@ -1,7 +1,8 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
+
 import { cn } from "@/lib/cn";
 
 /**
@@ -24,7 +25,7 @@ export function RootFurther({ className }: RootFurtherProps) {
         {/* ROOT FURTHER lockup */}
         <div className="mb-8 flex justify-center">
           <Image
-            src="/login/root-further.png"
+            src="/images/login/root-further.png"
             alt="ROOT FURTHER"
             width={451}
             height={200}

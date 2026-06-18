@@ -1,8 +1,9 @@
-import { redirect } from "next/navigation";
 import type { ReactNode } from "react";
+import { redirect } from "next/navigation";
+
+import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { createClient } from "@/lib/supabase/server";
-import { SiteFooter } from "@/components/layout/site-footer";
 
 /**
  * Layout for all authenticated screens under (protected).

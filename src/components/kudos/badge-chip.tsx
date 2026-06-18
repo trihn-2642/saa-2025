@@ -1,14 +1,15 @@
 import Image from "next/image";
+
 import { cn } from "@/lib/cn";
 
 export type BadgeTier = "new" | "rising" | "super" | "legend";
 
 /** Pre-rendered badge chip artwork (gradient + label baked in) from public/title. */
 const TIER_SRC: Record<BadgeTier, string> = {
-  new: "/title/new-hero.png",
-  rising: "/title/rising-hero.png",
-  super: "/title/super-hero.png",
-  legend: "/title/legend-hero.png",
+  new: "/images/title/new-hero.png",
+  rising: "/images/title/rising-hero.png",
+  super: "/images/title/super-hero.png",
+  legend: "/images/title/legend-hero.png",
 };
 
 const TIER_ALT: Record<BadgeTier, string> = {
@@ -58,7 +59,7 @@ export function BadgeChip({
           style={{ width: (height * 57) / 67, height }}
         >
           <Image
-            src="/title/campain.png"
+            src="/images/title/campain.png"
             alt="Campaign x2"
             fill
             sizes={`${Math.ceil((height * 57) / 67)}px`}

@@ -10,12 +10,13 @@
  */
 
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
+
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
 import { ROUTES } from "@/lib/routes";
-import Link from "next/link";
 
 export function SiteFooter() {
   const t = useTranslations("common");
@@ -56,7 +57,7 @@ export function SiteFooter() {
           className="shrink-0"
         >
           <Image
-            src="/logo.png"
+            src="/images/logo.png"
             alt="Sun* Annual Awards 2025"
             width={69}
             height={64}

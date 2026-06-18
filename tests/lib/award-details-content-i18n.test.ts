@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
+
 import { AWARD_DETAILS } from "@/lib/award-details-content";
-import viMessages from "@/messages/vi.json";
 import enMessages from "@/messages/en.json";
+import viMessages from "@/messages/vi.json";
 
 /**
  * Deep recursive key parity checker: ensures both objects have identical key

@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { AWARD_DETAILS, AWARD_NAV_SLUGS } from "@/lib/award-details-content";
 
 describe("AWARD_DETAILS", () => {
@@ -16,7 +17,7 @@ describe("AWARD_DETAILS", () => {
 
   it("all awards have valid image paths matching the slug pattern", () => {
     AWARD_DETAILS.forEach((award) => {
-      expect(award.image).toBe(`/awards/${award.slug}.png`);
+      expect(award.image).toBe(`/images/awards/${award.slug}.png`);
     });
   });
 

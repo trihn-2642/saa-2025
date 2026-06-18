@@ -2,7 +2,9 @@
 
 import { useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
+
 import { cn } from "@/lib/cn";
+
 import { KudosCard, type KudosCardProps } from "./kudos-card";
 
 export interface AllKudosFeedProps {

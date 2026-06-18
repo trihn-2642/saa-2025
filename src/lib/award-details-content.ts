@@ -9,7 +9,7 @@
  * strings, so they stay inline (not i18n keys).
  *
  * Image path + i18n key segment are both derived from `slug`, so the slug is
- * the single source of truth (DRY) — matches files under public/awards/.
+ * the single source of truth (DRY) — matches files under public/images/awards/.
  */
 
 /** One prize-value row. `amount` is the literal VND string; `noteKey` is an
@@ -20,7 +20,7 @@ export interface AwardPrizeValue {
 }
 
 export interface AwardDetail {
-  /** URL-safe slug; matches public/awards/<slug>.png and the i18n key segment. */
+  /** URL-safe slug; matches public/images/awards/<slug>.png and the i18n key segment. */
   slug: string;
   /** Absolute path from public/ root. */
   image: string;
@@ -45,7 +45,7 @@ function award(
 ): AwardDetail {
   return {
     slug,
-    image: `/awards/${slug}.png`,
+    image: `/images/awards/${slug}.png`,
     titleKey: `items.${slug}.title`,
     descKey: `items.${slug}.desc`,
     quantity,

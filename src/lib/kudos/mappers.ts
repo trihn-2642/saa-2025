@@ -1,18 +1,19 @@
-import type { KudosCardProps } from "@/components/kudos/kudos-card";
-import type { FilterOption } from "@/components/kudos/kudos-highlight-filters";
 import type {
   LeaderboardEntry,
   SidebarStats,
 } from "@/components/kudos/all-kudos-sidebar";
+import type { KudosCardProps } from "@/components/kudos/kudos-card";
+import type { FilterOption } from "@/components/kudos/kudos-highlight-filters";
 import type { SpotlightEntry } from "@/components/kudos/spotlight-board";
+
 import type {
-  KudosCard,
-  HashtagOption,
   DepartmentOption,
-  RankUpEntry,
   GiftRecipientEntry,
-  SpotlightData,
+  HashtagOption,
+  KudosCard,
   ProfileStats,
+  RankUpEntry,
+  SpotlightData,
 } from "./types";
 
 /** Format an ISO timestamp as the design's "HH:mm - MM/DD/YYYY" (e.g. "10:00 - 10/30/2025"). */

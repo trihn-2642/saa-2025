@@ -6,14 +6,16 @@
  * title / description / detail link sit left-aligned below it. On image error,
  */
 
-import IcUp from "@icons/ic-up.svg";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/cn";
 import Link from "next/link";
 
+import IcUp from "@icons/ic-up.svg";
+
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/cn";
+
 export interface AwardCardProps {
-  /** Absolute path from public/ root, e.g. /awards/top-talent.png */
+  /** Absolute path from public/ root, e.g. /images/awards/top-talent.png */
   imageSrc: string;
   /** Alt text for the award orb image */
   imageAlt: string;

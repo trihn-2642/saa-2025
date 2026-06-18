@@ -1,9 +1,10 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { Suspense, useState } from "react";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { Suspense, useState } from "react";
+import { useTranslations } from "next-intl";
+
 import { SiteHeader } from "@/components/layout/site-header";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/client";
@@ -40,7 +41,7 @@ function LoginContent() {
     <div className="relative flex h-screen w-full flex-col overflow-hidden bg-details-background">
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/countdown/bg-prelaunch.png')" }}
+        style={{ backgroundImage: "url('/images/countdown/bg-prelaunch.png')" }}
         aria-hidden="true"
       />
       <div
@@ -61,7 +62,7 @@ function LoginContent() {
         <div className="flex flex-col items-start gap-12 lg:gap-20">
           {/* "ROOT FURTHER" key visual (exported logo image, not text) */}
           <Image
-            src="/login/root-further.png"
+            src="/images/login/root-further.png"
             alt="ROOT FURTHER"
             width={451}
             height={200}

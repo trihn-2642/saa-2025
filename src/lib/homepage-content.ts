@@ -25,49 +25,49 @@ export interface AwardCard {
 
 /**
  * The 6 award cards in display order (matches design left→right, top→bottom).
- * Image paths resolve to existing files under public/awards/.
+ * Image paths resolve to existing files under public/images/awards/.
  */
 export const AWARD_CARDS: AwardCard[] = [
   {
     slug: "top-talent",
     titleKey: "awards.items.top-talent.title",
     descKey: "awards.items.top-talent.desc",
-    image: "/awards/top-talent.png",
+    image: "/images/awards/top-talent.png",
     href: "#",
   },
   {
     slug: "top-project",
     titleKey: "awards.items.top-project.title",
     descKey: "awards.items.top-project.desc",
-    image: "/awards/top-project.png",
+    image: "/images/awards/top-project.png",
     href: "#",
   },
   {
     slug: "top-project-leader",
     titleKey: "awards.items.top-project-leader.title",
     descKey: "awards.items.top-project-leader.desc",
-    image: "/awards/top-project-leader.png",
+    image: "/images/awards/top-project-leader.png",
     href: "#",
   },
   {
     slug: "best-manager",
     titleKey: "awards.items.best-manager.title",
     descKey: "awards.items.best-manager.desc",
-    image: "/awards/best-manager.png",
+    image: "/images/awards/best-manager.png",
     href: "#",
   },
   {
     slug: "signature-2025-creator",
     titleKey: "awards.items.signature-2025-creator.title",
     descKey: "awards.items.signature-2025-creator.desc",
-    image: "/awards/signature-2025-creator.png",
+    image: "/images/awards/signature-2025-creator.png",
     href: "#",
   },
   {
     slug: "mvp",
     titleKey: "awards.items.mvp.title",
     descKey: "awards.items.mvp.desc",
-    image: "/awards/mvp.png",
+    image: "/images/awards/mvp.png",
     href: "#",
   },
 ];

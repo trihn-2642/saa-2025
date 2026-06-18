@@ -8,10 +8,12 @@
  */
 
 import Image from "next/image";
-import IcUp from "@icons/ic-up.svg";
-import { useTranslations } from "next-intl";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
+
+import IcUp from "@icons/ic-up.svg";
+
+import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/lib/routes";
 
 export function KudosSection() {
@@ -24,7 +26,7 @@ export function KudosSection() {
             bg-details-container is a fallback until the asset is present. */}
         <div className="relative isolate h-full overflow-hidden rounded-2xl bg-details-container">
           <Image
-            src="/homepage-saa/kudos-background.png"
+            src="/images/homepage-saa/kudos-background.png"
             alt=""
             fill
             sizes="(max-width: 1024px) 100vw, 1120px"
@@ -66,7 +68,7 @@ export function KudosSection() {
             {/* Right: KUDOS logo */}
             <div className="flex shrink-0 items-center justify-center lg:w-91">
               <Image
-                src="/kudos-logo.png"
+                src="/images/kudos-logo.png"
                 alt="Sun* Kudos"
                 width={714}
                 height={147}

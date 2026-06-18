@@ -1,15 +1,16 @@
 "use client";
 
-import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
+
 import { setLocale } from "@/app/actions/set-locale";
 import {
   Header,
   type HeaderUser,
   type NavLink,
 } from "@/components/layout/header";
-import { createClient } from "@/lib/supabase/client";
 import { ROUTES } from "@/lib/routes";
+import { createClient } from "@/lib/supabase/client";
 
 /**
  * Client wrapper around <Header> that wires real behaviours (language switch

@@ -9,11 +9,13 @@
  * placeholders (no target pages yet — clarifications decision 1).
  */
 
-import IcClose from "@icons/ic-close.svg";
-import IcRulesSAA from "@icons/ic-rules-saa.svg";
-import IcPen from "@icons/ic-pen.svg";
-import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
+
+import IcClose from "@icons/ic-close.svg";
+import IcPen from "@icons/ic-pen.svg";
+import IcRulesSAA from "@icons/ic-rules-saa.svg";
+
 import { cn } from "@/lib/cn";
 
 function ActionPill({ icon, label }: { icon: React.ReactNode; label: string }) {

@@ -1,11 +1,14 @@
 "use client";
 
-import IcOpenGift from "@icons/ic-open-gift.svg";
-import Image from "next/image";
 import type { ReactNode } from "react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { cn } from "@/lib/cn";
+
+import IcOpenGift from "@icons/ic-open-gift.svg";
+
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/cn";
+
 import { HoverProfileCard } from "./hover-profile-card";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -67,13 +70,13 @@ function CampaignBadge() {
   const t = useTranslations("kudos");
   return (
     <span className="group relative inline-flex">
-      <Image src="/title/campain.png" alt="x2" width={34} height={40} />
+      <Image src="/images/title/campain.png" alt="x2" width={34} height={40} />
 
       {/* Tooltip — fire icon + title + description, shown on hover. */}
       <span className="pointer-events-none absolute top-full left-1/2 z-50 mt-2 -translate-x-1/2 opacity-0 transition-opacity duration-150 group-hover:opacity-100">
         <span className="flex w-92 gap-4 rounded-2xl border border-primary-dark-hover bg-details-overlay p-4 text-left shadow-lg">
           <Image
-            src="/title/campain.png"
+            src="/images/title/campain.png"
             alt=""
             width={57}
             height={67}

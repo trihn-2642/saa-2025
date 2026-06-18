@@ -13,12 +13,13 @@
  */
 
 import { revalidatePath } from "next/cache";
-import { createClient } from "@/lib/supabase/server";
+
 import {
   getProfileCard,
   listHighlightKudos,
   listKudos,
 } from "@/lib/kudos/queries";
+import { createClient } from "@/lib/supabase/server";
 
 // ── Client-callable read wrappers ───────────────────────────────────────────────
 // The feed/highlight queries live in queries.ts which imports the server Supabase

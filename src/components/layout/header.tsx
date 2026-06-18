@@ -1,19 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
+
 import IcBell from "@icons/ic-bell.svg";
 import IcRight from "@icons/ic-right.svg";
 import IcUserProfile from "@icons/ic-user-profile.svg";
-import { useTranslations } from "next-intl";
-import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 
 import {
   Dropdown,
   DropdownItem,
-  DropdownSelect,
   type DropdownOption,
+  DropdownSelect,
 } from "@/components/ui/dropdown";
 import { cn } from "@/lib/cn";
 import { ROUTES } from "@/lib/routes";
@@ -176,7 +177,7 @@ export function Header({
 
   const logo = (
     <Image
-      src="/logo.png"
+      src="/images/logo.png"
       alt="Sun* Annual Awards 2025"
       width={52}
       height={48}

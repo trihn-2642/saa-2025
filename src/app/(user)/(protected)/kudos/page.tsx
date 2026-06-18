@@ -8,17 +8,17 @@
  * signed-in users.
  */
 
-import { createClient } from "@/lib/supabase/server";
-import {
-  listKudos,
-  listHighlightKudos,
-  getSpotlight,
-  getProfileStats,
-  getLeaderboards,
-  listHashtags,
-  listDepartments,
-} from "@/lib/kudos/queries";
 import { KudosBoard } from "@/components/kudos/kudos-board";
+import {
+  getLeaderboards,
+  getProfileStats,
+  getSpotlight,
+  listDepartments,
+  listHashtags,
+  listHighlightKudos,
+  listKudos,
+} from "@/lib/kudos/queries";
+import { createClient } from "@/lib/supabase/server";
 
 export default async function KudosPage() {
   const supabase = await createClient();

@@ -1,14 +1,15 @@
 "use client";
 
 import { cn } from "@/lib/cn";
+
 import { AllKudosFeed } from "./all-kudos-feed";
-import type { KudosCardProps } from "./kudos-card";
-import { KudosSectionHeader } from "./kudos-section-header";
 import {
   AllKudosSidebar,
   type LeaderboardEntry,
   type SidebarStats,
 } from "./all-kudos-sidebar";
+import type { KudosCardProps } from "./kudos-card";
+import { KudosSectionHeader } from "./kudos-section-header";
 
 export interface AllKudosProps {
   /** Feed cards (already mapped to UI props). */

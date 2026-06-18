@@ -1,17 +1,20 @@
 "use client";
 
+import { useCallback, useEffect, useState } from "react";
+import useEmblaCarousel from "embla-carousel-react";
+
 import IcLeft from "@icons/ic-left.svg";
 import IcRight from "@icons/ic-right.svg";
-import useEmblaCarousel from "embla-carousel-react";
-import { useCallback, useEffect, useState } from "react";
+
 import { cn } from "@/lib/cn";
+
+import { Button } from "../ui/button";
+import { KudosCard, type KudosCardProps } from "./kudos-card";
 import {
-  KudosHighlightFilters,
   type FilterOption,
+  KudosHighlightFilters,
 } from "./kudos-highlight-filters";
 import { KudosSectionHeader } from "./kudos-section-header";
-import { KudosCard, type KudosCardProps } from "./kudos-card";
-import { Button } from "../ui/button";
 
 export interface KudosHighlightProps {
   cards: KudosCardProps[];

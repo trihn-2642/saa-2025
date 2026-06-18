@@ -1,8 +1,10 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+
 import { useScrollSpy } from "@/hooks/use-scroll-spy";
 import { AWARD_DETAILS, AWARD_NAV_SLUGS } from "@/lib/award-details-content";
+
 import { AwardDetailBlock } from "./award-detail-block";
 import { AwardNavSidebar } from "./award-nav-sidebar";
 

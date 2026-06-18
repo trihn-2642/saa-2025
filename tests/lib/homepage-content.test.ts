@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
+
 import { AWARD_CARDS } from "@/lib/homepage-content";
-import viMessages from "@/messages/vi.json";
 import enMessages from "@/messages/en.json";
+import viMessages from "@/messages/vi.json";
 
 describe("AWARD_CARDS", () => {
   it("has exactly 6 cards in the correct order", () => {
@@ -18,7 +19,7 @@ describe("AWARD_CARDS", () => {
 
   it("all cards have valid image paths matching the slug pattern", () => {
     AWARD_CARDS.forEach((card) => {
-      expect(card.image).toBe(`/awards/${card.slug}.png`);
+      expect(card.image).toBe(`/images/awards/${card.slug}.png`);
     });
   });
 

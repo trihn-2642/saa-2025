@@ -1,4 +1,5 @@
 import Image from "next/image";
+
 import { AwardsSection } from "@/components/homepage/awards-section";
 import { Hero } from "@/components/homepage/hero";
 import { KudosSection } from "@/components/homepage/kudos-section";
@@ -26,7 +27,7 @@ export default function HomePage() {
         <div className="pointer-events-none absolute inset-x-0 top-0 -z-10">
           <div className="relative w-full">
             <Image
-              src="/homepage-saa/keyvisual.jpg"
+              src="/images/homepage-saa/keyvisual.jpg"
               alt=""
               width={1508}
               height={1392}

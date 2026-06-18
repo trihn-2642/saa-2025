@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+
 import { KudosBannerActionBar } from "./kudos-banner-action-bar";
 
 export interface KudosBannerProps {
@@ -19,7 +20,7 @@ export function KudosBanner({ onOpenDialog, onSearch }: KudosBannerProps) {
       <div className="relative aspect-1440/512 w-full">
         {/* Keyvisual background (gradient baked into the export). */}
         <Image
-          src="/kudos-live-board/kv-background.jpg"
+          src="/images/kudos-live-board/kv-background.jpg"
           alt=""
           fill
           priority
@@ -35,7 +36,7 @@ export function KudosBanner({ onOpenDialog, onSearch }: KudosBannerProps) {
               {t("banner.title")}
             </p>
             <Image
-              src="/kudos-logo.png"
+              src="/images/kudos-logo.png"
               alt="Sun* Kudos"
               width={714}
               height={147}
