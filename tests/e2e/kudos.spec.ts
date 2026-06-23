@@ -70,3 +70,42 @@ test.describe("Kudos /kudos — authenticated render", () => {
     await expect(page.getByRole("button", { name: "Next" })).toBeVisible();
   });
 });
+
+// ── Write-kudos dialog ────────────────────────────────────────────────────────
+// Default locale is vi (no NEXT_LOCALE cookie). The banner CTA, the dialog
+// fields, and validation are asserted without touching the DB (no real submit).
+test.describe("Kudos /kudos — write dialog", () => {
+  test.skip(
+    !authReady,
+    "no authenticated Supabase session (auth.setup deferred)",
+  );
+  test.use({ storageState: "tests/e2e/storageState.json" });
+
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/kudos");
+    await expect(page).toHaveURL(/\/kudos$/);
+    // Banner CTA pill opens the dialog (vi placeholder text).
+    await page.getByRole("button", { name: /Hôm nay/ }).click();
+  });
+
+  test("opens with the editor + required fields", async ({ page }) => {
+    // Quill mounts (dynamic, ssr:false) → editor + toolbar visible.
+    await expect(page.locator(".ql-editor")).toBeVisible();
+    await expect(page.locator(".ql-toolbar")).toBeVisible();
+    // Recipient + Danh hiệu fields present (aria-labels are locale text).
+    await expect(page.getByLabel("Người nhận")).toBeVisible();
+    await expect(page.getByLabel("Danh hiệu")).toBeVisible();
+  });
+
+  test("Gửi is disabled until required fields are filled", async ({ page }) => {
+    await expect(
+      page.getByRole("button", { name: "Gửi", exact: true }),
+    ).toBeDisabled();
+  });
+
+  test("Hủy closes the dialog (editor unmounts)", async ({ page }) => {
+    await expect(page.locator(".ql-editor")).toBeVisible();
+    await page.getByRole("button", { name: /Hủy/ }).click();
+    await expect(page.locator(".ql-editor")).toHaveCount(0);
+  });
+});

@@ -92,6 +92,31 @@ describe("mapToCardProps", () => {
     expect(props.receiver.avatarUrl).toBeUndefined();
     expect(props.receiver.badge).toBeUndefined();
   });
+
+  it("non-anonymous: sender name = real full name; title passed through", () => {
+    expect(props.title).toBe("Inspiring");
+    expect(props.sender.name).toBe("Alice");
+    expect(props.isAnonymous).toBe(false);
+  });
+
+  it("anonymous: sender name = the chosen nickname", () => {
+    const p = mapToCardProps({
+      ...fullCard,
+      isAnonymous: true,
+      anonymousName: "Doraemon",
+    });
+    expect(p.isAnonymous).toBe(true);
+    expect(p.sender.name).toBe("Doraemon");
+  });
+
+  it("anonymous without a nickname: sender name = '' (card shows the fallback)", () => {
+    const p = mapToCardProps({
+      ...fullCard,
+      isAnonymous: true,
+      anonymousName: null,
+    });
+    expect(p.sender.name).toBe("");
+  });
 });
 
 describe("filter option mappers", () => {

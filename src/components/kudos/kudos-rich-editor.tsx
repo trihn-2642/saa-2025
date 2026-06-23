@@ -27,6 +27,7 @@ import IcPen from "@icons/ic-pen.svg";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/cn";
+import { normalizeUrl } from "@/lib/kudos/normalize-url";
 
 export interface KudosRichEditorProps {
   onChange: (html: string) => void;
@@ -49,13 +50,6 @@ const TOOLBAR = [
 const FORMATS = ["bold", "italic", "strike", "list", "link", "blockquote"];
 
 const MODULES = { toolbar: TOOLBAR };
-
-/** Prepend https:// when the URL has no scheme. */
-function normalizeUrl(url: string): string {
-  const u = url.trim();
-  if (!u) return "";
-  return /^(https?:|mailto:|tel:)/i.test(u) ? u : `https://${u}`;
-}
 
 interface LinkDraft {
   content: string;
