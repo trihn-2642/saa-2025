@@ -105,7 +105,7 @@ function ImageThumb({
   alt: string;
 }) {
   return (
-    <div className="relative size-20 shrink-0 rounded-sm border border-primary-normal bg-white">
+    <div className="relative size-20 shrink-0 rounded-sm border border-primary-dark-hover bg-white">
       {/* unoptimized: previews are blob: object URLs the image optimizer can't fetch. */}
       <Image
         src={src}
@@ -113,7 +113,7 @@ function ImageThumb({
         fill
         sizes="80px"
         unoptimized
-        className="rounded-sm object-cover"
+        className="rounded-sm border border-primary-normal object-cover"
       />
       <button
         type="button"

@@ -7,7 +7,7 @@ import { RootFurther } from "@/components/homepage/root-further";
 import { WidgetButton } from "@/components/homepage/widget-button";
 
 /**
- * /home — protected Homepage SAA.
+ * Homepage SAA.
  *
  * Auth guard, profile read, shared header + footer all live in the
  * (protected) layout. This page owns only the homepage body composition.

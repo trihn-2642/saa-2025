@@ -6,7 +6,7 @@
  * like "/home" / "/kudos" across headers, footers, redirects, etc.
  */
 export const ROUTES = {
-  home: "/home",
+  home: "/",
   awardInformation: "/award-information",
   kudos: "/kudos",
   login: "/login",

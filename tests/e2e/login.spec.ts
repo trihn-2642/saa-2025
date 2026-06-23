@@ -10,10 +10,10 @@ test.describe("Login screen", () => {
     await expect(page.getByText(/Bản quyền thuộc về Sun/)).toBeVisible();
   });
 
-  test("redirects an unauthenticated user from /home to /login", async ({
+  test("redirects an unauthenticated user from / to /login", async ({
     page,
   }) => {
-    await page.goto("/home");
+    await page.goto("/");
     await expect(page).toHaveURL(/\/login$/);
   });
 

@@ -24,15 +24,15 @@ const authReady = (() => {
 })();
 
 // ── Unauthenticated (default context has no session) ──────────────────────────
-test.describe("Homepage /home — unauthenticated", () => {
-  test("redirects /home to /login when signed out", async ({ page }) => {
-    await page.goto("/home");
+test.describe("Homepage / — unauthenticated", () => {
+  test("redirects / to /login when signed out", async ({ page }) => {
+    await page.goto("/");
     await expect(page).toHaveURL(/\/login$/);
   });
 });
 
 // ── Authenticated page render (opts into the session from auth.setup) ─────────
-test.describe("Homepage /home — authenticated render", () => {
+test.describe("Homepage / — authenticated render", () => {
   test.skip(
     !authReady,
     "no authenticated Supabase session (auth.setup deferred)",
@@ -40,8 +40,8 @@ test.describe("Homepage /home — authenticated render", () => {
   test.use({ storageState: "tests/e2e/storageState.json" });
 
   test.beforeEach(async ({ page }) => {
-    await page.goto("/home");
-    await expect(page).toHaveURL(/\/home$/);
+    await page.goto("/");
+    await expect(page).toHaveURL(/\/$/);
   });
 
   test("header + nav render", async ({ page }) => {
