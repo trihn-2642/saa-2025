@@ -24,6 +24,14 @@ export interface Profile {
   departmentName: string | null;
 }
 
+/** Minimal profile result from autocomplete search. */
+export interface ProfileSearchResult {
+  id: string;
+  fullName: string;
+  avatarUrl: string | null;
+  departmentName: string | null;
+}
+
 /** Raw kudos row fields (before like-count aggregation). */
 export interface Kudos {
   id: string;
@@ -32,6 +40,12 @@ export interface Kudos {
   message: string;
   hashtags: string[];
   images: string[];
+  /** True if the sender chose to hide their identity on the card. */
+  isAnonymous: boolean;
+  /** Display nickname shown when isAnonymous (e.g. "Doraemon"); null otherwise. */
+  anonymousName: string | null;
+  /** "Danh hiệu" / award title shown as the centered heading (e.g. "IDOL"). */
+  title: string | null;
   createdAt: string; // ISO-8601
 }
 

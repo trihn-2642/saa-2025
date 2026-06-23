@@ -30,7 +30,10 @@ export function mapToCardProps(card: KudosCard): KudosCardProps {
     id: card.id,
     sender: {
       id: card.sender.id,
-      name: card.sender.fullName,
+      // Anonymous: show the chosen nickname (card falls back to a label if empty).
+      name: card.isAnonymous
+        ? (card.anonymousName ?? "")
+        : card.sender.fullName,
       dept: card.sender.departmentName ?? "",
       avatarUrl: card.sender.avatarUrl ?? undefined,
       stars: card.sender.stars,
@@ -45,9 +48,11 @@ export function mapToCardProps(card: KudosCard): KudosCardProps {
       badge: card.receiver.badge ?? undefined,
     },
     createdAt: formatKudosDate(card.createdAt),
+    title: card.title ?? "",
     content: card.message,
     hashtags: card.hashtags,
     images: card.images,
+    isAnonymous: card.isAnonymous,
     likeCount: card.likeCount,
     likedByMe: card.likedByMe,
     canLike: card.canLike,

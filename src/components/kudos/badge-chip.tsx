@@ -4,7 +4,6 @@ import { cn } from "@/lib/cn";
 
 export type BadgeTier = "new" | "rising" | "super" | "legend";
 
-/** Pre-rendered badge chip artwork (gradient + label baked in) from public/title. */
 const TIER_SRC: Record<BadgeTier, string> = {
   new: "/images/title/new-hero.png",
   rising: "/images/title/rising-hero.png",
@@ -19,7 +18,6 @@ const TIER_ALT: Record<BadgeTier, string> = {
   legend: "Legend Hero",
 };
 
-// Default chip size (px) — matches the artwork's 5.5:1 ratio at 20px tall.
 const DEFAULT_WIDTH = 110;
 const DEFAULT_HEIGHT = 20;
 

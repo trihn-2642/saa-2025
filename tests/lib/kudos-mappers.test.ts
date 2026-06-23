@@ -31,6 +31,9 @@ const fullCard: KudosCard = {
   message: "Thanks!",
   hashtags: ["Dedicated"],
   images: ["/a.png"],
+  isAnonymous: false,
+  anonymousName: null,
+  title: "Inspiring",
   // No trailing "Z": parsed as LOCAL time so the assertion is timezone-stable.
   createdAt: "2025-10-30T10:05:00",
   likeCount: 7,
@@ -88,6 +91,31 @@ describe("mapToCardProps", () => {
     expect(props.receiver.dept).toBe("");
     expect(props.receiver.avatarUrl).toBeUndefined();
     expect(props.receiver.badge).toBeUndefined();
+  });
+
+  it("non-anonymous: sender name = real full name; title passed through", () => {
+    expect(props.title).toBe("Inspiring");
+    expect(props.sender.name).toBe("Alice");
+    expect(props.isAnonymous).toBe(false);
+  });
+
+  it("anonymous: sender name = the chosen nickname", () => {
+    const p = mapToCardProps({
+      ...fullCard,
+      isAnonymous: true,
+      anonymousName: "Doraemon",
+    });
+    expect(p.isAnonymous).toBe(true);
+    expect(p.sender.name).toBe("Doraemon");
+  });
+
+  it("anonymous without a nickname: sender name = '' (card shows the fallback)", () => {
+    const p = mapToCardProps({
+      ...fullCard,
+      isAnonymous: true,
+      anonymousName: null,
+    });
+    expect(p.sender.name).toBe("");
   });
 });
 

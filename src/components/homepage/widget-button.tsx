@@ -17,11 +17,21 @@ import IcPen from "@icons/ic-pen.svg";
 import IcRulesSAA from "@icons/ic-rules-saa.svg";
 
 import { cn } from "@/lib/cn";
+import { useSubmitKudosStore } from "@/stores/submit-kudos-store";
 
-function ActionPill({ icon, label }: { icon: React.ReactNode; label: string }) {
+function ActionPill({
+  icon,
+  label,
+  onClick,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  onClick?: () => void;
+}) {
   return (
     <button
       type="button"
+      onClick={onClick}
       className="flex min-w-37.25 cursor-pointer items-center gap-2 rounded-sm bg-primary-normal p-4 text-subtitle font-bold text-text-primary-2 shadow-button-glow transition-colors hover:bg-primary-light-active [&_svg]:size-6 [&_svg]:shrink-0"
     >
       {icon}
@@ -33,6 +43,7 @@ function ActionPill({ icon, label }: { icon: React.ReactNode; label: string }) {
 export function WidgetButton() {
   const t = useTranslations("homepage");
   const [open, setOpen] = useState(false);
+  const openSubmitDialog = useSubmitKudosStore((s) => s.open);
 
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-0 z-50">
@@ -48,6 +59,10 @@ export function WidgetButton() {
               <ActionPill
                 icon={<IcPen className="text-text-primary-2" aria-hidden />}
                 label={t("widgetMenu.writeKudos")}
+                onClick={() => {
+                  openSubmitDialog();
+                  setOpen(false);
+                }}
               />
             </>
           )}

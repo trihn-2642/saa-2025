@@ -9,6 +9,7 @@ import IcPen from "@icons/ic-pen.svg";
 import { fetchProfileCard } from "@/app/(user)/(protected)/kudos/actions";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
+import { useSubmitKudosStore } from "@/stores/submit-kudos-store";
 
 import { BadgeChip } from "./badge-chip";
 
@@ -35,6 +36,7 @@ export function HoverProfileCard({
   className,
 }: HoverProfileCardProps) {
   const t = useTranslations("kudos");
+  const openSubmitDialog = useSubmitKudosStore((s) => s.open);
   const triggerRef = useRef<HTMLSpanElement>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [data, setData] = useState<ProfileCardData | null>(null);
@@ -136,7 +138,14 @@ export function HoverProfileCard({
               {/* CTA */}
               <Button
                 variant="primary"
-                onClick={onSendKudo}
+                onClick={() =>
+                  onSendKudo
+                    ? onSendKudo()
+                    : openSubmitDialog({
+                        id: profileId,
+                        fullName: data.fullName,
+                      })
+                }
                 iconLeft={<IcPen aria-hidden className="size-6!" />}
                 className="w-full py-2 text-body font-bold tracking-[0.15px]"
               >

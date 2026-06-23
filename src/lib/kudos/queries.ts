@@ -20,6 +20,7 @@ import type {
   Leaderboards,
   PaginatedResult,
   Profile,
+  ProfileSearchResult,
   ProfileStats,
   RankUpEntry,
   SpotlightData,
@@ -60,6 +61,52 @@ function mapProfile(
     stars: 0,
     badge: null,
   };
+}
+
+// ── searchProfiles ────────────────────────────────────────────────────────────
+
+/**
+ * Searches profiles by full_name (case-insensitive prefix/substring match).
+ * Excludes the currently authenticated user (can't send kudos to yourself).
+ * Returns at most 10 results. Empty/whitespace query returns [].
+ */
+export async function searchProfiles(
+  query: string,
+): Promise<ProfileSearchResult[]> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const trimmed = query.trim();
+
+  let q = supabase
+    .from("profiles")
+    .select("id, full_name, avatar_url, departments ( name )")
+    .order("full_name")
+    // Empty query → browse the full list (default dropdown); typing filters it.
+    .limit(trimmed.length === 0 ? 50 : 10);
+
+  // Filter by name only when the user has typed something.
+  if (trimmed.length > 0) {
+    q = q.ilike("full_name", `%${trimmed}%`);
+  }
+
+  // Exclude self — only possible when authenticated.
+  if (user) {
+    q = q.neq("id", user.id);
+  }
+
+  const { data, error } = await q;
+  if (error) throw new Error(`searchProfiles: ${error.message}`);
+
+  return (data ?? []).map((row) => ({
+    id: row.id,
+    fullName: row.full_name ?? "",
+    avatarUrl: row.avatar_url ?? null,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    departmentName: (row.departments as any)?.name ?? null,
+  }));
 }
 
 // ── listKudos ─────────────────────────────────────────────────────────────────
@@ -103,6 +150,9 @@ export async function listKudos({
       message,
       hashtags,
       images,
+      is_anonymous,
+      anonymous_name,
+      title,
       created_at,
       like_count,
       heart_weight,
@@ -125,6 +175,13 @@ export async function listKudos({
 
   if (hashtag) {
     query = query.contains("hashtags", [hashtag]);
+  }
+
+  // Department filter: keep kudos where the sender OR receiver is in the dept.
+  if (department) {
+    const ids = await fetchDepartmentProfileIds(supabase, department);
+    if (ids.length === 0) return { items: [], nextCursor: null };
+    query = query.or(senderOrReceiverIn(ids));
   }
 
   const { data: rows, error } = await query;
@@ -177,13 +234,15 @@ export async function listKudos({
       message: row.message,
       hashtags: row.hashtags ?? [],
       images: row.images ?? [],
+      isAnonymous: row.is_anonymous ?? false,
+      anonymousName: row.anonymous_name ?? null,
+      title: row.title ?? null,
       createdAt: row.created_at,
       likeCount: row.like_count ?? 0,
       heartWeight: row.heart_weight ?? 0,
       likedByMe,
-      // canLike: not the sender AND not already liked
-      canLike:
-        currentUserId !== null && currentUserId !== row.sender_id && !likedByMe,
+      // canLike: any authenticated viewer who hasn't already liked (self-likes allowed).
+      canLike: currentUserId !== null && !likedByMe,
       // canEdit: only the sender can edit their own kudos
       canEdit: currentUserId !== null && currentUserId === row.sender_id,
       sender,
@@ -223,6 +282,9 @@ export async function listHighlightKudos(
       message,
       hashtags,
       images,
+      is_anonymous,
+      anonymous_name,
+      title,
       created_at,
       like_count,
       heart_weight,
@@ -241,6 +303,13 @@ export async function listHighlightKudos(
 
   if (filters.hashtag) {
     query = query.contains("hashtags", [filters.hashtag]);
+  }
+
+  // Department filter: keep kudos where the sender OR receiver is in the dept.
+  if (filters.department) {
+    const ids = await fetchDepartmentProfileIds(supabase, filters.department);
+    if (ids.length === 0) return [];
+    query = query.or(senderOrReceiverIn(ids));
   }
 
   const { data: rows, error } = await query;
@@ -279,12 +348,15 @@ export async function listHighlightKudos(
       message: row.message,
       hashtags: row.hashtags ?? [],
       images: row.images ?? [],
+      isAnonymous: row.is_anonymous ?? false,
+      anonymousName: row.anonymous_name ?? null,
+      title: row.title ?? null,
       createdAt: row.created_at,
       likeCount: row.like_count ?? 0,
       heartWeight: row.heart_weight ?? 0,
       likedByMe,
-      canLike:
-        currentUserId !== null && currentUserId !== row.sender_id && !likedByMe,
+      // canLike: any authenticated viewer who hasn't already liked (self-likes allowed).
+      canLike: currentUserId !== null && !likedByMe,
       canEdit: currentUserId !== null && currentUserId === row.sender_id,
       sender,
       receiver,
@@ -591,4 +663,31 @@ async function fetchLikedSet(
   if (error) throw new Error(`fetchLikedSet: ${error.message}`);
 
   return new Set((data ?? []).map((row) => row.kudos_id));
+}
+
+/**
+ * Returns the ids of all profiles belonging to a department (by name).
+ * Used to filter the feed/highlight by department on either side (sender OR
+ * receiver). Returns [] when the department has no members.
+ */
+async function fetchDepartmentProfileIds(
+  supabase: SupabaseClient,
+  departmentName: string,
+): Promise<string[]> {
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("id, departments!inner ( name )")
+    .eq("departments.name", departmentName);
+
+  if (error) throw new Error(`fetchDepartmentProfileIds: ${error.message}`);
+  return (data ?? []).map((row) => row.id);
+}
+
+/**
+ * PostgREST `.or()` filter string matching kudos where the sender OR receiver
+ * is one of the given profile ids.
+ */
+function senderOrReceiverIn(ids: string[]): string {
+  const list = ids.join(",");
+  return `sender_id.in.(${list}),receiver_id.in.(${list})`;
 }

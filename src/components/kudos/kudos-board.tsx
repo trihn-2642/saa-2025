@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState, useTransition } from "react";
+import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 
 import {
   fetchFeed,
@@ -27,6 +27,7 @@ import type {
   RankUpEntry,
   SpotlightData,
 } from "@/lib/kudos/types";
+import { useSubmitKudosStore } from "@/stores/submit-kudos-store";
 
 import { AllKudos } from "./all-kudos";
 import { KudosBanner } from "./kudos-banner";
@@ -212,11 +213,25 @@ export function KudosBoard({
     }
   }, []);
 
-  // Submit-kudos dialog is deferred: it will be a shared/global dialog opened via
-  // context/zustand (reused across screens). For now the pill is a no-op.
+  // Open the global submit-kudos dialog (mounted once in the protected layout).
+  const openSubmitDialog = useSubmitKudosStore((s) => s.open);
   const handleOpenDialog = useCallback(() => {
-    // TODO: open the shared submit-kudos dialog (global context/zustand store).
-  }, []);
+    openSubmitDialog();
+  }, [openSubmitDialog]);
+
+  // Refetch the first page when a kudos is submitted, so the new one shows up
+  // (feedCards is client state seeded from props — router.refresh alone won't
+  // reset it). The ref guards against firing on filter changes.
+  const submittedAt = useSubmitKudosStore((s) => s.submittedAt);
+  const lastSubmittedRef = useRef(submittedAt);
+  useEffect(() => {
+    if (submittedAt === lastSubmittedRef.current) return;
+    lastSubmittedRef.current = submittedAt;
+    handleFilterChange({
+      hashtag: selectedHashtag,
+      department: selectedDepartment,
+    });
+  }, [submittedAt, handleFilterChange, selectedHashtag, selectedDepartment]);
 
   return (
     <div className="min-h-screen w-full bg-details-background">

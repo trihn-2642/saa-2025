@@ -114,11 +114,36 @@
       "messageLabel": "Lời nhắn",
       "messagePlaceholder": "Viết lời cảm ơn của bạn...",
       "hashtagLabel": "Hashtag",
-      "imageLabel": "Ảnh đính kèm (tùy chọn)",
+      "imageLabel": "Image",
       "chooseImage": "Chọn ảnh",
       "imagesSelected": "{count} ảnh đã chọn",
       "cancel": "Huỷ",
-      "confirm": "Gửi"
+      "confirm": "Gửi",
+      "title": "Gửi lời cám ơn và ghi nhận đến đồng đội",
+      "recipientLabel": "Người nhận",
+      "searchPlaceholder": "Tìm kiếm",
+      "editorPlaceholder": "Hãy gửi gắm lời cám ơn và ghi nhận đến đồng đội tại đây nhé!",
+      "hintMention": "Bạn có thể \"@ + tên\" để nhắc tới đồng nghiệp khác",
+      "addHashtag": "Hashtag",
+      "maxHashtag": "Tối đa 5",
+      "addImage": "Image",
+      "maxImage": "Tối đa 5",
+      "anonymousLabel": "Gửi lời cám ơn và ghi nhận ẩn danh",
+      "nicknameLabel": "Nickname ẩn danh",
+      "nicknamePlaceholder": "Ví dụ: Doraemon",
+      "linkTitle": "Thêm đường dẫn",
+      "linkContent": "Nội dung",
+      "linkUrl": "URL",
+      "linkSave": "Lưu",
+      "successToast": "Đã gửi Kudos thành công!",
+      "errorToast": "Gửi Kudos thất bại. Vui lòng thử lại.",
+      "send": "Gửi",
+      "sending": "Đang gửi...",
+      "badgeLabel": "Danh hiệu",
+      "badgePlaceholder": "Dành tặng một danh hiệu cho đồng đội",
+      "badgeHint1": "Ví dụ: Người truyền động lực cho tôi.",
+      "badgeHint2": "Danh hiệu sẽ hiển thị làm tiêu đề Kudos của bạn.",
+      "standards": "Tiêu chuẩn cộng đồng"
     },
     "search": {
       "placeholder": "Tìm kiếm profile Sunner"
@@ -145,14 +170,16 @@
       "copyLink": "Sao chép liên kết",
       "viewDetail": "Xem chi tiết",
       "edit": "Chỉnh sửa kudos",
-      "sent": "đã gửi đến"
+      "sent": "đã gửi đến",
+      "anonymous": "Người ẩn danh"
     },
     "toast": {
       "linkCopied": "Link copied — ready to share!"
     },
     "empty": {
       "noKudos": "Hiện tại chưa có Kudos nào.",
-      "noData": "Chưa có dữ liệu"
+      "noData": "Chưa có dữ liệu",
+      "loading": "Đang tải..."
     },
     "feed": {
       "loadingMore": "Đang tải thêm..."

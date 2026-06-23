@@ -16,9 +16,15 @@ import { revalidatePath } from "next/cache";
 
 import {
   getProfileCard,
+  listHashtags,
   listHighlightKudos,
   listKudos,
+  searchProfiles,
 } from "@/lib/kudos/queries";
+import {
+  isHtmlContentEmpty,
+  sanitizeKudosHtml,
+} from "@/lib/kudos/sanitize-html";
 import { createClient } from "@/lib/supabase/server";
 
 // ── Client-callable read wrappers ───────────────────────────────────────────────
@@ -48,15 +54,41 @@ export async function fetchProfileCard(profileId: string) {
   return getProfileCard(profileId);
 }
 
+/**
+ * Profile autocomplete for the recipient picker.
+ * Excludes the current user; returns at most 10 matches.
+ * Empty/whitespace query returns [] without hitting the DB.
+ */
+export async function fetchSearchProfiles(query: string) {
+  return searchProfiles(query);
+}
+
+/**
+ * Hashtag list for the submit-kudos dropdown.
+ * Returns { value: name, label: name } pairs — the "#" prefix is added by the
+ * presentation layer (dropdown + chip both render `#{label}`).
+ */
+export async function fetchHashtagOptions() {
+  const hashtags = await listHashtags();
+  return hashtags.map((h) => ({ value: h.name, label: h.name }));
+}
+
 // ── submitKudos ────────────────────────────────────────────────────────────────
 
 export interface SubmitKudosInput {
   receiverId: string;
+  /** "Danh hiệu" / award title — the centered card heading (required). */
+  title: string;
+  /** HTML from the rich-text editor. Sanitized server-side before insert. */
   message: string;
-  /** Hashtag strings (already stored without '#' prefix). Max 5. */
+  /** Hashtag strings (already stored without '#' prefix). Min 1, max 5. */
   hashtags: string[];
-  /** Public image URLs (e.g. uploaded to Supabase Storage). Max 10. */
+  /** Public image URLs (e.g. uploaded to Supabase Storage). Max 5. */
   images?: string[];
+  /** When true, the board card hides the sender's identity. Credit stays on sender_id. */
+  isAnonymous?: boolean;
+  /** Display nickname shown on the card when isAnonymous. Required if isAnonymous. */
+  anonymousName?: string;
 }
 
 export interface SubmitKudosResult {
@@ -84,27 +116,45 @@ export async function submitKudos(
   } = await supabase.auth.getUser();
   if (!user) throw new Error("Unauthenticated");
 
-  // Validate message.
-  const message = input.message.trim();
-  if (!message) throw new Error("Message cannot be empty.");
-
   // Validate receiver.
   if (!input.receiverId) throw new Error("Receiver is required.");
   if (input.receiverId === user.id)
     throw new Error("You cannot send kudos to yourself.");
 
-  // Cap arrays to prevent abuse (silent truncation — UI should enforce upstream).
+  // Title (Danh hiệu) is required.
+  const title = (input.title ?? "").trim();
+  if (!title) throw new Error("A title is required.");
+
+  // Sanitize HTML message (authoritative XSS guard — submitKudos is directly callable).
+  const sanitizedMessage = sanitizeKudosHtml(input.message ?? "");
+  if (isHtmlContentEmpty(sanitizedMessage))
+    throw new Error("Message cannot be empty.");
+
+  // Enforce hashtag requirement (min 1, cap at 5).
   const hashtags = (input.hashtags ?? []).slice(0, 5);
-  const images = (input.images ?? []).slice(0, 10);
+  if (hashtags.length === 0)
+    throw new Error("At least one hashtag is required.");
+
+  // Cap images to 5 (UI enforces upstream; server caps for defense-in-depth).
+  const images = (input.images ?? []).slice(0, 5);
+
+  const isAnonymous = input.isAnonymous ?? false;
+  // Nickname is required when anonymous (it's the name shown on the card).
+  const anonymousName = isAnonymous ? (input.anonymousName ?? "").trim() : null;
+  if (isAnonymous && !anonymousName)
+    throw new Error("An anonymous nickname is required.");
 
   const { data, error } = await supabase
     .from("kudos")
     .insert({
       sender_id: user.id,
       receiver_id: input.receiverId,
-      message,
+      title,
+      message: sanitizedMessage,
       hashtags,
       images,
+      is_anonymous: isAnonymous,
+      anonymous_name: anonymousName,
     })
     .select("id")
     .single();
@@ -130,7 +180,7 @@ export interface ToggleLikeResult {
  *
  * Business rules enforced:
  * - Authenticated user must exist (401 if not).
- * - User cannot like their own kudos (sender_id === auth user).
+ * - Self-likes are allowed (a like credits the receiver, not the liker).
  * - One like per (kudos, user) — duplicate insert is rejected by DB unique constraint;
  *   we check first to give a clean error.
  * - `is_special` is set to true when the like occurs during an active special_days window
@@ -148,19 +198,7 @@ export async function toggleLike(kudosId: string): Promise<ToggleLikeResult> {
   } = await supabase.auth.getUser();
   if (!user) throw new Error("Unauthenticated");
 
-  // Load the kudos to enforce no-self-like rule.
-  const { data: kudos, error: kudosError } = await supabase
-    .from("kudos")
-    .select("sender_id")
-    .eq("id", kudosId)
-    .single();
-
-  if (kudosError || !kudos)
-    throw new Error("Kudos not found or access denied.");
-
-  if (kudos.sender_id === user.id)
-    throw new Error("You cannot like your own kudos.");
-
+  // Self-likes are allowed (a like credits the receiver, not the liker).
   // Check whether this user already has a like on this kudos.
   const { data: existingLike } = await supabase
     .from("kudos_likes")

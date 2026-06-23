@@ -23,10 +23,6 @@ import { cn } from "@/lib/cn";
  *   - DropdownItem   — a single menu item
  *   - DropdownSub    — an item that opens a nested flyout submenu
  *   - DropdownSelect — a full select (trigger + open/close + selection)
- *
- * Surface: #00070c, 1px primary-dark-hover border, radius 8, padding 6.
- * Item: 16px padding, Montserrat 400/16 white; selected = button-hover fill +
- * yellow text glow. Colors come from the design tokens in globals.css.
  */
 
 // ── Surface ──────────────────────────────────────────────────────────────────
@@ -38,7 +34,7 @@ export function Dropdown({
     <div
       role="menu"
       className={cn(
-        "flex flex-col rounded-lg border border-primary-dark-hover bg-details-overlay p-1.5",
+        "custom-scrollbar flex max-h-87.5 flex-col overflow-y-auto rounded-lg border border-primary-dark-hover bg-details-overlay p-1.5",
         className,
       )}
       {...props}
