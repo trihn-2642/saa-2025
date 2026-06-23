@@ -5,6 +5,8 @@ import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
+import IcGoogle from "@icons/ic-google.svg";
+
 import { SiteHeader } from "@/components/layout/site-header";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/client";
@@ -39,9 +41,16 @@ function LoginContent() {
 
   return (
     <div className="relative flex h-screen w-full flex-col overflow-hidden bg-details-background">
+      {/* Keyvisual cropped to match the Figma login fill (node 662:14389):
+          background-size 159.763% 133.371%, offset -440px/-218px on a 1440-wide
+          frame → ~51% 64% as responsive percentages. */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/images/countdown/bg-prelaunch.png')" }}
+        className="absolute inset-0 bg-no-repeat"
+        style={{
+          backgroundImage: "url('/images/homepage-saa/keyvisual.jpg')",
+          backgroundSize: "159.763% 133.371%",
+          backgroundPosition: "51% 64%",
+        }}
         aria-hidden="true"
       />
       <div
@@ -83,15 +92,11 @@ function LoginContent() {
 
             <Button
               variant="primary"
-              iconRight={
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src="/icons/ic-google.svg" alt="" />
-              }
+              iconRight={<IcGoogle aria-hidden className="size-6!" />}
               onClick={handleLogin}
               disabled={loading}
               aria-busy={loading}
-              // Login uses the large button variant: 22px/700, radius 8, px 24.
-              className="w-fit rounded-lg px-6 text-[22px] font-bold"
+              className="w-fit rounded-lg px-6 text-cta font-bold"
             >
               {t("google")}
             </Button>
@@ -106,7 +111,7 @@ function LoginContent() {
       </main>
 
       <footer className="relative z-10 flex w-full items-center justify-center border-t border-border-subtle bg-surface-overlay px-8 py-6 sm:px-22.5">
-        <p className="text-sm text-white/60">{t("footer")}</p>
+        <p className="text-body font-bold text-white">{t("footer")}</p>
       </footer>
     </div>
   );
