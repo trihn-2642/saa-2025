@@ -114,11 +114,36 @@
       "messageLabel": "Message",
       "messagePlaceholder": "Write your thanks...",
       "hashtagLabel": "Hashtag",
-      "imageLabel": "Attachments (optional)",
+      "imageLabel": "Image",
       "chooseImage": "Choose images",
       "imagesSelected": "{count} image(s) selected",
       "cancel": "Cancel",
-      "confirm": "Send"
+      "confirm": "Send",
+      "title": "Send thanks and recognition to a teammate",
+      "recipientLabel": "Recipient",
+      "searchPlaceholder": "Search",
+      "editorPlaceholder": "Send your thanks and recognition to a teammate here!",
+      "hintMention": "You can \"@ + name\" to mention a colleague",
+      "addHashtag": "Hashtag",
+      "maxHashtag": "Max 5",
+      "addImage": "Image",
+      "maxImage": "Max 5",
+      "anonymousLabel": "Send thanks and recognition anonymously",
+      "nicknameLabel": "Anonymous nickname",
+      "nicknamePlaceholder": "e.g. Doraemon",
+      "linkTitle": "Add link",
+      "linkContent": "Content",
+      "linkUrl": "URL",
+      "linkSave": "Save",
+      "successToast": "Kudos sent successfully!",
+      "errorToast": "Failed to send Kudos. Please try again.",
+      "send": "Send",
+      "sending": "Sending...",
+      "badgeLabel": "Title",
+      "badgePlaceholder": "Dedicate an award to a teammate",
+      "badgeHint1": "e.g. The one who motivates me.",
+      "badgeHint2": "The title is shown as your Kudos heading.",
+      "standards": "Community standards"
     },
     "search": {
       "placeholder": "Search Sunner profile"
@@ -145,14 +170,16 @@
       "copyLink": "Copy link",
       "viewDetail": "View detail",
       "edit": "Edit kudos",
-      "sent": "sent to"
+      "sent": "sent to",
+      "anonymous": "Anonymous"
     },
     "toast": {
       "linkCopied": "Link copied — ready to share!"
     },
     "empty": {
       "noKudos": "No Kudos yet.",
-      "noData": "No data available"
+      "noData": "No data available",
+      "loading": "Loading..."
     },
     "feed": {
       "loadingMore": "Loading more..."

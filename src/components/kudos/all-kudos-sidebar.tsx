@@ -117,7 +117,7 @@ function SidebarLeaderboard({
           {emptyText}
         </p>
       ) : (
-        <div className="flex max-h-95.5 flex-col gap-4 overflow-y-auto">
+        <div className="custom-scrollbar flex max-h-95.5 flex-col gap-4 overflow-y-auto">
           {entries.map((entry) => (
             <div key={entry.id} className="flex flex-row items-center gap-2">
               {/* Hover the avatar → lazy-loaded profile card (same as feed cards). */}

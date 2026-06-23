@@ -5,6 +5,7 @@ import { Geist, Geist_Mono, Montserrat } from "next/font/google";
 import localFont from "next/font/local";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
+import { Toaster } from "sonner";
 
 // Self-hosted LED 7-segment font (preloaded, no FOUT) — stands in for the
 // design's "Digital Numbers" font.
@@ -47,12 +48,14 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
+    // suppressHydrationWarning: browser extensions (Dark Reader, Google
+    // Translate's `translated-ltr`, ColorZilla…) mutate <html>/<body>
+    // class/attributes before hydration; our markup is deterministic.
     <html
       lang={locale}
       className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} ${dseg7.variable} h-full bg-details-background antialiased`}
+      suppressHydrationWarning
     >
-      {/* suppressHydrationWarning: browser extensions (e.g. ColorZilla's
-          cz-shortcut-listen) inject attributes on <body> before hydration. */}
       <body
         className="min-h-full bg-details-background"
         suppressHydrationWarning
@@ -61,6 +64,7 @@ export default async function RootLayout({
           {/* Design canvas is a fixed 1512px wide — cap + center every screen
               so wider displays (e.g. 1920px) show centered content, not stretched. */}
           <div className="mx-auto w-full max-w-378">{children}</div>
+          <Toaster richColors position="top-center" />
         </NextIntlClientProvider>
       </body>
     </html>

@@ -12,6 +12,7 @@ import IcUp from "@icons/ic-up.svg";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
+import { sanitizeKudosHtml } from "@/lib/kudos/sanitize-html";
 
 import type { BadgeTier } from "./badge-chip";
 import { BadgeChip } from "./badge-chip";
@@ -36,9 +37,13 @@ export interface KudosCardProps {
   sender: KudosUser;
   receiver: KudosUser;
   createdAt: string;
+  /** "Danh hiệu" / award title — centered card heading. */
+  title?: string;
   content: string;
   hashtags: string[];
   images: string[];
+  /** When true, the sender block shows "Người ẩn danh" with no hover card. */
+  isAnonymous?: boolean;
   likeCount: number;
   likedByMe: boolean;
   canLike: boolean;
@@ -55,49 +60,62 @@ export interface KudosCardProps {
 
 interface UserBlockProps {
   user: KudosUser;
+  /** When true, render placeholder avatar + anonymous label instead of real identity. */
+  anonymous?: boolean;
 }
 
-function UserBlock({ user }: UserBlockProps) {
+function UserBlock({ user, anonymous = false }: UserBlockProps) {
+  const t = useTranslations("kudos");
+
+  const avatar = (
+    <span className="relative block h-16 w-16 shrink-0">
+      {!anonymous && user.avatarUrl ? (
+        <Image
+          src={user.avatarUrl}
+          alt={user.name}
+          fill
+          sizes="64px"
+          className="rounded-full border-2 border-white object-cover"
+        />
+      ) : (
+        <span className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-white bg-gray-200 text-2xl font-bold text-gray-500">
+          {anonymous ? "?" : user.name.charAt(0)}
+        </span>
+      )}
+    </span>
+  );
+
   return (
     <div className="flex min-w-0 flex-1 flex-col items-center gap-3.25">
-      <HoverProfileCard profileId={user.id}>
-        <span className="relative block h-16 w-16 shrink-0">
-          {user.avatarUrl ? (
-            <Image
-              src={user.avatarUrl}
-              alt={user.name}
-              fill
-              sizes="64px"
-              className="rounded-full border-2 border-white object-cover"
-            />
-          ) : (
-            <span className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-white bg-gray-200 text-2xl font-bold text-gray-500">
-              {user.name.charAt(0)}
-            </span>
-          )}
-        </span>
-      </HoverProfileCard>
+      {/* Anonymous sender: no hover card */}
+      {anonymous ? (
+        avatar
+      ) : (
+        <HoverProfileCard profileId={user.id}>{avatar}</HoverProfileCard>
+      )}
 
       <div className="flex flex-col items-center gap-0.5">
         <span className="w-full truncate text-center text-body font-bold tracking-[0.15px] text-text-primary-2">
-          {user.name}
+          {anonymous ? user.name || t("card.anonymous") : user.name}
         </span>
-        {/* Department • badge on one inline row (per design). */}
-        <div className="flex max-w-full items-center gap-2.5 text-center">
-          {user.dept && (
-            <span className="truncate text-sm leading-5 font-bold tracking-[0.1px] text-neutral-dark-hover">
-              {user.dept}
-            </span>
-          )}
-          {user.dept && user.badge && (
-            <span className="block h-1 w-1 rounded-full bg-neutral-dark-hover" />
-          )}
-          {user.badge && (
-            <BadgeTooltip tier={user.badge} className="shrink-0">
-              <BadgeChip tier={user.badge} />
-            </BadgeTooltip>
-          )}
-        </div>
+        {/* Department • badge on one inline row (per design). Hidden when anonymous. */}
+        {!anonymous && (
+          <div className="flex max-w-full items-center gap-2.5 text-center">
+            {user.dept && (
+              <span className="truncate text-sm leading-5 font-bold tracking-[0.1px] text-neutral-dark-hover">
+                {user.dept}
+              </span>
+            )}
+            {user.dept && user.badge && (
+              <span className="block h-1 w-1 rounded-full bg-neutral-dark-hover" />
+            )}
+            {user.badge && (
+              <BadgeTooltip tier={user.badge} className="shrink-0">
+                <BadgeChip tier={user.badge} />
+              </BadgeTooltip>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -109,9 +127,11 @@ export function KudosCard({
   sender,
   receiver,
   createdAt,
+  title,
   content,
   hashtags,
   images,
+  isAnonymous = false,
   likeCount,
   likedByMe,
   canLike,
@@ -124,8 +144,11 @@ export function KudosCard({
 }: KudosCardProps) {
   const t = useTranslations("kudos");
   const isHighlight = variant === "highlight";
+  // Highlight carousel keeps a fixed height (clamp); feed cards show the full
+  // message and grow to fit (min-h provides the floor).
   const contentClamp = isHighlight ? "line-clamp-3" : "line-clamp-4";
   const hashtagLine = hashtags.map((t) => `#${t}`).join(" ");
+  const safeHtml = sanitizeKudosHtml(content);
 
   // Guard against rapid double-likes: disable while the toggle is in flight.
   const [liking, setLiking] = useState(false);
@@ -149,7 +172,7 @@ export function KudosCard({
       {/* User info row — columns top-aligned; send icon sits at avatar center
           (avatar is size-16, icon size-6 → mt-5 centers it). */}
       <div className="flex flex-row items-start justify-between">
-        <UserBlock user={sender} />
+        <UserBlock user={sender} anonymous={isAnonymous} />
         <IcSend
           aria-hidden
           className="mt-5 size-8 shrink-0 text-text-primary-2"
@@ -166,13 +189,13 @@ export function KudosCard({
           {createdAt}
         </span>
 
-        {/* Category row — centered label, with the edit pencil pinned right.
+        {/* Title row — centered "Danh hiệu", with the edit pencil pinned right.
             Pencil shows only on feed cards the current user sent. */}
-        {(hashtags.length > 0 || (!isHighlight && canEdit)) && (
+        {(title || (!isHighlight && canEdit)) && (
           <div className="relative flex min-h-6 items-center justify-center">
-            {hashtags.length > 0 && (
+            {title && (
               <span className="text-center text-body leading-6 font-bold tracking-[0.5px] text-text-primary-2 uppercase">
-                {hashtags[0]}
+                {title}
               </span>
             )}
             {!isHighlight && canEdit && (
@@ -194,14 +217,15 @@ export function KudosCard({
             isHighlight ? "min-h-32.5 py-4" : "min-h-48 py-8",
           )}
         >
-          <p
+          {/* Render as sanitized HTML to support rich-text formatting.
+              safeHtml is already stripped of scripts/styles by sanitizeKudosHtml. */}
+          <div
             className={cn(
-              "text-[20px] leading-8 font-bold text-text-primary-2",
+              "text-[20px] leading-8 wrap-break-word text-text-primary-2 [&_a]:text-blue-700 [&_a]:underline [&_ol]:list-decimal [&_ol]:pl-5 [&_ul]:list-disc [&_ul]:pl-5",
               contentClamp,
             )}
-          >
-            {content}
-          </p>
+            dangerouslySetInnerHTML={{ __html: safeHtml }}
+          />
         </div>
 
         {!isHighlight && images.length > 0 && (

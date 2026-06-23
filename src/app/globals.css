@@ -160,3 +160,19 @@ body {
      override those utilities and show a white margin outside the 1512px canvas. */
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-neutral-dark) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--color-neutral-dark);
+  background-clip: content-box;
+  border: 2px solid transparent;
+  border-radius: 9999px;
+}

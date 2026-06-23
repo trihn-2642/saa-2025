@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { redirect } from "next/navigation";
 
+import { SubmitKudos } from "@/components/kudos/submit-kudos";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { createClient } from "@/lib/supabase/server";
@@ -12,6 +13,9 @@ import { createClient } from "@/lib/supabase/server";
  * proxy.ts) and renders the shared SiteHeader with the current user's profile.
  * Profile falls back to Google's user_metadata so the header works even before
  * the profiles trigger has populated the row.
+ *
+ * SubmitKudos is mounted here once so the global write-kudos dialog is available
+ * on every protected page; visibility is controlled by the zustand store.
  */
 export default async function ProtectedLayout({
   children,
@@ -39,11 +43,13 @@ export default async function ProtectedLayout({
   return (
     <div className="min-h-screen bg-details-background text-white">
       {/* Width is capped to the 1512px design canvas in the root layout. */}
-      <div className="sticky top-0 z-30">
+      <div className="sticky top-0 z-100">
         <SiteHeader user={{ name, email, avatarUrl }} showNav />
       </div>
       {children}
       <SiteFooter />
+      {/* Global write-kudos dialog — store-driven, renders null when closed. */}
+      <SubmitKudos />
     </div>
   );
 }

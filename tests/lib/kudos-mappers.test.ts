@@ -31,6 +31,9 @@ const fullCard: KudosCard = {
   message: "Thanks!",
   hashtags: ["Dedicated"],
   images: ["/a.png"],
+  isAnonymous: false,
+  anonymousName: null,
+  title: "Inspiring",
   // No trailing "Z": parsed as LOCAL time so the assertion is timezone-stable.
   createdAt: "2025-10-30T10:05:00",
   likeCount: 7,

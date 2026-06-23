@@ -52,11 +52,44 @@ function rand(seed: number): number {
   return x - Math.floor(x);
 }
 
-/** Position (% within the panel) + size/colour bucket for a scattered name. */
-function placeName(id: string, index: number) {
+// Scatter area (% within the panel). Top band only — the activity feed sits
+// across the bottom, so names stay above it.
+const AREA = { left: 6, top: 12, width: 86, height: 56 };
+
+/**
+ * Position (% within the panel) + size/colour bucket for a scattered name.
+ *
+ * Names are spread over a grid sized to the visible count (one name per cell →
+ * no overlap, fills the width), then jittered per-id so it reads as an organic
+ * constellation rather than a rigid grid. Re-distributes when filtering so the
+ * visible subset always uses the whole area.
+ */
+function placeName(id: string, index: number, count: number) {
   const h = hashId(id);
-  const left = 5 + rand(h + 1) * 88; // 5%–93%
-  const top = 11 + rand(h + 97) * 74; // 11%–85%
+
+  // Grid sized to the count, biased to the area's aspect ratio (wider than tall).
+  const cols = Math.max(
+    1,
+    Math.ceil(Math.sqrt(count * (AREA.width / AREA.height))),
+  );
+  const rows = Math.max(1, Math.ceil(count / cols));
+  const col = index % cols;
+  const row = Math.floor(index / cols);
+
+  const cw = AREA.width / cols;
+  const ch = AREA.height / rows;
+
+  // Center a partial last row so it doesn't bunch to the left.
+  const lastRowCount = count - cols * (rows - 1);
+  const rowOffset =
+    row === rows - 1 && lastRowCount < cols
+      ? ((cols - lastRowCount) / 2) * cw
+      : 0;
+
+  // Jitter to 20%–80% within the cell (per-id, stable).
+  const left =
+    AREA.left + rowOffset + col * cw + cw * (0.2 + rand(h + 1) * 0.6);
+  const top = AREA.top + row * ch + ch * (0.2 + rand(h + 97) * 0.6);
   const sizeVal = rand(h + 41);
 
   // First (most recent) name is the red highlight, per design.
@@ -156,7 +189,11 @@ export function SpotlightBoard({
         {/* Name cloud (behind the chrome). */}
         <div aria-hidden className="absolute inset-0">
           {filtered.map((entry, idx) => {
-            const { left, top, tone } = placeName(entry.id, idx);
+            const { left, top, tone } = placeName(
+              entry.id,
+              idx,
+              filtered.length,
+            );
             return (
               <span
                 key={entry.id}
