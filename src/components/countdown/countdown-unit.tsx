@@ -40,8 +40,8 @@ export function CountdownUnit({ value, label, compact }: CountdownUnitProps) {
       <span
         className={
           compact
-            ? "text-text-white text-2xl leading-none font-bold uppercase"
-            : "text-text-white text-2xl leading-none font-bold uppercase sm:text-4xl"
+            ? "text-2xl leading-none font-bold text-white uppercase"
+            : "text-2xl leading-none font-bold text-white uppercase sm:text-4xl"
         }
       >
         {label}
