@@ -4,20 +4,21 @@ import { decideRedirect } from "@/lib/auth/route-guard";
 
 describe("decideRedirect", () => {
   it("sends a logged-out user away from a protected route", () => {
-    expect(decideRedirect({ hasUser: false, pathname: "/home" })).toBe(
+    expect(decideRedirect({ hasUser: false, pathname: "/" })).toBe("/login");
+    expect(decideRedirect({ hasUser: false, pathname: "/kudos" })).toBe(
       "/login",
     );
-    expect(decideRedirect({ hasUser: false, pathname: "/home/settings" })).toBe(
-      "/login",
-    );
+    expect(
+      decideRedirect({ hasUser: false, pathname: "/award-information" }),
+    ).toBe("/login");
   });
 
   it("sends a logged-in user away from /login", () => {
-    expect(decideRedirect({ hasUser: true, pathname: "/login" })).toBe("/home");
+    expect(decideRedirect({ hasUser: true, pathname: "/login" })).toBe("/");
   });
 
   it("lets matching states through (no redirect)", () => {
-    expect(decideRedirect({ hasUser: true, pathname: "/home" })).toBeNull();
+    expect(decideRedirect({ hasUser: true, pathname: "/" })).toBeNull();
     expect(decideRedirect({ hasUser: false, pathname: "/login" })).toBeNull();
     expect(
       decideRedirect({ hasUser: false, pathname: "/countdown" }),

@@ -233,14 +233,15 @@ export function KudosCard({
             {images.slice(0, 5).map((src, i) => (
               <div
                 key={i}
-                className="relative h-22 w-22 shrink-0 overflow-hidden rounded-[18px] border border-primary-dark-hover"
+                className="relative h-22 w-22 shrink-0 overflow-hidden rounded-sm border border-primary-dark-hover"
               >
                 <Image
                   src={src}
                   alt={`image-${i}`}
                   fill
                   sizes="88px"
-                  className="object-cover"
+                  unoptimized
+                  className="border border-primary-normal object-cover"
                 />
               </div>
             ))}

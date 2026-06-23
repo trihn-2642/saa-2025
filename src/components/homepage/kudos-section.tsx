@@ -53,7 +53,7 @@ export function KudosSection() {
 
               {/* CTA */}
               <div className="mt-4">
-                <Link href={ROUTES.home} className="no-underline">
+                <Link href={ROUTES.kudos} className="no-underline">
                   <Button
                     variant="primary"
                     className="min-w-31.5 text-body font-bold tracking-[0.15px]"

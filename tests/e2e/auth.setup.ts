@@ -121,11 +121,11 @@ async function globalSetup() {
     }));
     fs.writeFileSync(STORAGE_PATH, JSON.stringify({ cookies, origins: [] }));
 
-    // 4. Verify the session actually authenticates /home.
+    // 4. Verify the session actually authenticates the protected home (/).
     const browser = await chromium.launch();
     const ctx = await browser.newContext({ storageState: STORAGE_PATH });
     const page = await ctx.newPage();
-    await page.goto("http://localhost:3000/home", {
+    await page.goto("http://localhost:3000/", {
       waitUntil: "domcontentloaded",
     });
     const ok = !page.url().includes("/login");
@@ -133,7 +133,7 @@ async function globalSetup() {
 
     if (!ok) {
       console.warn(
-        "[auth.setup] /home still redirected to /login — auth cookie not accepted; writing empty state (specs will skip).",
+        "[auth.setup] / still redirected to /login — auth cookie not accepted; writing empty state (specs will skip).",
       );
       writeEmptyState();
       return;
