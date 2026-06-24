@@ -2,12 +2,13 @@
 
 import type { ReactNode } from "react";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 
 import IcOpenGift from "@icons/ic-open-gift.svg";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
+import type { ActiveCampaign } from "@/lib/kudos/types";
 
 import { HoverProfileCard } from "./hover-profile-card";
 
@@ -34,6 +35,8 @@ export interface AllKudosSidebarProps {
   rankUps: LeaderboardEntry[];
   giftRecipients: LeaderboardEntry[];
   onOpenGift?: () => void;
+  /** Active double-hearts window — drives the ×2 badge. Null hides the badge. */
+  activeCampaign?: ActiveCampaign | null;
   className?: string;
 }
 
@@ -47,16 +50,16 @@ const boxClass =
 interface StatRowProps {
   label: string;
   value: number;
-  /** Optional badge shown just before the value (e.g. campaign ×2). */
-  isShowBadge?: ReactNode;
+  /** Optional node rendered right after the label (e.g. the campaign ×2 badge). */
+  badge?: ReactNode;
 }
 
-function StatRow({ label, value, isShowBadge }: StatRowProps) {
+function StatRow({ label, value, badge }: StatRowProps) {
   return (
     <div className="flex flex-row items-center justify-between">
       <span className="flex items-center text-cta font-bold text-white">
         {label}
-        {isShowBadge && <CampaignBadge />}
+        {badge}
       </span>
       <span className="text-[32px] leading-10 font-bold text-primary-normal">
         {value}
@@ -65,9 +68,23 @@ function StatRow({ label, value, isShowBadge }: StatRowProps) {
   );
 }
 
-/** Campaign ×2 badge with a hover tooltip explaining the double-hearts window. */
-function CampaignBadge() {
+/**
+ * Campaign ×2 badge with a hover tooltip explaining the double-hearts window.
+ * Dates come from the active special_days row (not hardcoded).
+ */
+function CampaignBadge({ campaign }: { campaign: ActiveCampaign }) {
   const t = useTranslations("kudos");
+  const format = useFormatter();
+  // Format in the event's timezone so the window reads the same for everyone.
+  const dateOpts = {
+    day: "2-digit",
+    month: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZone: "Asia/Ho_Chi_Minh",
+  } as const;
+  const start = format.dateTime(new Date(campaign.startsAt), dateOpts);
+  const end = format.dateTime(new Date(campaign.endsAt), dateOpts);
   return (
     <span className="group relative inline-flex">
       <Image src="/images/title/campain.png" alt="x2" width={34} height={40} />
@@ -87,7 +104,7 @@ function CampaignBadge() {
               {t("sidebar.campaign.title")}
             </span>
             <span className="text-sm leading-5 text-neutral-dark-hover">
-              {t("sidebar.campaign.desc")}
+              {t("sidebar.campaign.desc", { start, end })}
             </span>
           </span>
         </span>
@@ -162,6 +179,7 @@ export function AllKudosSidebar({
   stats,
   giftRecipients,
   onOpenGift,
+  activeCampaign,
   className,
 }: AllKudosSidebarProps) {
   const t = useTranslations("kudos");
@@ -175,7 +193,9 @@ export function AllKudosSidebar({
         <StatRow
           label={t("sidebar.hearts")}
           value={stats.heartsReceived}
-          isShowBadge
+          badge={
+            activeCampaign ? <CampaignBadge campaign={activeCampaign} /> : null
+          }
         />
         <div className="my-1 border-t border-border-subtle" />
         <StatRow

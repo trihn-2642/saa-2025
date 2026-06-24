@@ -195,7 +195,7 @@
       "giftRecipients": "10 SUNNER NHẬN QUÀ\nMỚI NHẤT",
       "campaign": {
         "title": "Ngày x2 tim – lan tỏa gấp đôi yêu thương!",
-        "desc": "Từ 00:00 ngày 20/12 đến 23:59 ngày 25/12, tất cả tim bạn nhận được đều được nhân đôi."
+        "desc": "Từ {start} đến {end}, tất cả tim bạn nhận được đều được nhân đôi."
       }
     },
     "hoverCard": {

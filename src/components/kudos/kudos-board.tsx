@@ -18,6 +18,7 @@ import {
   mapToCardProps,
 } from "@/lib/kudos/mappers";
 import type {
+  ActiveCampaign,
   DepartmentOption,
   Filters,
   GiftRecipientEntry,
@@ -53,6 +54,8 @@ export interface KudosBoardProps {
   /** Filter lookup lists. */
   hashtags: HashtagOption[];
   departments: DepartmentOption[];
+  /** Active double-hearts window, or null when none is running. */
+  activeCampaign: ActiveCampaign | null;
 }
 
 // ── Internal helpers ──────────────────────────────────────────────────────────
@@ -98,6 +101,7 @@ export function KudosBoard({
   giftRecipients,
   hashtags,
   departments,
+  activeCampaign,
 }: KudosBoardProps) {
   // ── Filter state ─────────────────────────────────────────────────────────
   const [selectedHashtag, setSelectedHashtag] = useState<string | undefined>();
@@ -268,6 +272,7 @@ export function KudosBoard({
           rankUps={mapRankUps(rankUps)}
           giftRecipients={mapGiftRecipients(giftRecipients)}
           onOpenGift={handleOpenGift}
+          activeCampaign={activeCampaign}
         />
       </div>
     </div>

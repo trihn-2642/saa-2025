@@ -195,7 +195,7 @@
       "giftRecipients": "TOP 10 SUNNERS\nLATEST GIFTS",
       "campaign": {
         "title": "Double-hearts day – spread twice the love!",
-        "desc": "From 00:00 on 20/12 to 23:59 on 25/12, every heart you receive is doubled."
+        "desc": "From {start} to {end}, every heart you receive is doubled."
       }
     },
     "hoverCard": {

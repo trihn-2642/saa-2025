@@ -11,6 +11,7 @@ import { createClient } from "@/lib/supabase/server";
 
 import { badgeFromSenders, starsFromReceived } from "./badges";
 import type {
+  ActiveCampaign,
   Badge,
   DepartmentOption,
   Filters,
@@ -555,6 +556,33 @@ export async function listDepartments(): Promise<DepartmentOption[]> {
     code: row.code,
     name: row.name,
   }));
+}
+
+// ── getActiveCampaign ────────────────────────────────────────────────────────────
+
+/**
+ * Returns the special_days window currently active (covering server "now"), or
+ * null if none. Drives the sidebar's ×2 hearts badge + tooltip — the badge only
+ * shows while a window is active, and the tooltip reflects its real dates.
+ * Mirrors the special-day check in toggleLike (server time, never the client clock).
+ */
+export async function getActiveCampaign(): Promise<ActiveCampaign | null> {
+  const supabase = await createClient();
+  const now = new Date().toISOString();
+
+  const { data, error } = await supabase
+    .from("special_days")
+    .select("starts_at, ends_at")
+    .lte("starts_at", now)
+    .gte("ends_at", now)
+    .order("ends_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  if (error) throw new Error(`getActiveCampaign: ${error.message}`);
+  if (!data) return null;
+
+  return { startsAt: data.starts_at, endsAt: data.ends_at };
 }
 
 // ── getProfileCard ─────────────────────────────────────────────────────────────

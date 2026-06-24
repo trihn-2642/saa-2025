@@ -132,6 +132,14 @@ export interface Leaderboards {
   giftRecipients: GiftRecipientEntry[];
 }
 
+// ── Special-day campaign ─────────────────────────────────────────────────────────
+
+/** An active double-hearts window (a special_days row covering "now"). */
+export interface ActiveCampaign {
+  startsAt: string; // ISO-8601
+  endsAt: string; // ISO-8601
+}
+
 // ── Lookup lists ───────────────────────────────────────────────────────────────
 
 export interface HashtagOption {
