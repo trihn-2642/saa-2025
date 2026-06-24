@@ -10,6 +10,7 @@
 
 import { KudosBoard } from "@/components/kudos/kudos-board";
 import {
+  getActiveCampaign,
   getLeaderboards,
   getProfileStats,
   getSpotlight,
@@ -37,6 +38,7 @@ export default async function KudosPage() {
     leaderboards,
     hashtags,
     departments,
+    activeCampaign,
   ] = await Promise.all([
     listKudos({ limit: 10 }),
     listHighlightKudos(),
@@ -45,6 +47,7 @@ export default async function KudosPage() {
     getLeaderboards(),
     listHashtags(),
     listDepartments(),
+    getActiveCampaign(),
   ]);
 
   return (
@@ -58,6 +61,7 @@ export default async function KudosPage() {
       giftRecipients={leaderboards.giftRecipients}
       hashtags={hashtags}
       departments={departments}
+      activeCampaign={activeCampaign}
     />
   );
 }

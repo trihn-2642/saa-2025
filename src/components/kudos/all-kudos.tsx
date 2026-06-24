@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/cn";
+import type { ActiveCampaign } from "@/lib/kudos/types";
 
 import { AllKudosFeed } from "./all-kudos-feed";
 import {
@@ -25,6 +26,8 @@ export interface AllKudosProps {
   rankUps: LeaderboardEntry[];
   giftRecipients: LeaderboardEntry[];
   onOpenGift?: () => void;
+  /** Active double-hearts window, or null when none is running. */
+  activeCampaign?: ActiveCampaign | null;
   className?: string;
 }
 
@@ -44,6 +47,7 @@ export function AllKudos({
   rankUps,
   giftRecipients,
   onOpenGift,
+  activeCampaign,
   className,
 }: AllKudosProps) {
   return (
@@ -66,6 +70,7 @@ export function AllKudos({
           rankUps={rankUps}
           giftRecipients={giftRecipients}
           onOpenGift={onOpenGift}
+          activeCampaign={activeCampaign}
         />
       </div>
     </div>

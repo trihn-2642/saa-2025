@@ -221,7 +221,7 @@ export function KudosCard({
               safeHtml is already stripped of scripts/styles by sanitizeKudosHtml. */}
           <div
             className={cn(
-              "text-[20px] leading-8 wrap-break-word text-text-primary-2 [&_a]:text-blue-700 [&_a]:underline [&_ol]:list-decimal [&_ol]:pl-5 [&_ul]:list-disc [&_ul]:pl-5",
+              "text-[20px] leading-8 wrap-break-word text-text-primary-2 [&_a]:text-blue-700 [&_a]:underline [&_ol]:list-decimal [&_ol]:pl-6 [&_ul]:list-disc [&_ul]:pl-6",
               contentClamp,
             )}
             dangerouslySetInnerHTML={{ __html: safeHtml }}
