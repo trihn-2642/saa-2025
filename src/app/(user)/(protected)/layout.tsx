@@ -46,7 +46,7 @@ export default async function ProtectedLayout({
       <div className="sticky top-0 z-100">
         <SiteHeader user={{ name, email, avatarUrl }} showNav />
       </div>
-      {children}
+      <main className="min-h-[calc(100vh-224px)]">{children}</main>
       <SiteFooter />
       {/* Global write-kudos dialog — store-driven, renders null when closed. */}
       <SubmitKudos />
