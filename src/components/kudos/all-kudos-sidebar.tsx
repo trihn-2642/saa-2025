@@ -108,16 +108,16 @@ function SidebarLeaderboard({
   emptyText,
 }: SidebarLeaderboardProps) {
   return (
-    <div className={boxClass}>
-      <h3 className="mb-2.5 text-center text-cta font-bold whitespace-pre-line text-primary-normal">
+    <div className={cn(boxClass, "px-0")}>
+      <h3 className="mb-2.5 px-6 text-center text-cta font-bold whitespace-pre-line text-primary-normal">
         {title}
       </h3>
       {entries.length === 0 ? (
-        <p className="text-center text-body text-neutral-dark-hover">
+        <p className="px-6 text-center text-body text-neutral-dark-hover">
           {emptyText}
         </p>
       ) : (
-        <div className="custom-scrollbar flex max-h-95.5 flex-col gap-4 overflow-y-auto">
+        <div className="custom-scrollbar flex max-h-95.5 flex-col gap-4 overflow-y-auto px-6">
           {entries.map((entry) => (
             <div key={entry.id} className="flex flex-row items-center gap-2">
               {/* Hover the avatar → lazy-loaded profile card (same as feed cards). */}
