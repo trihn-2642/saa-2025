@@ -14,13 +14,23 @@ export async function GET(request: Request) {
   const next =
     rawNext.startsWith("/") && !rawNext.startsWith("//") ? rawNext : "/";
 
+  // Behind a proxy (Vercel), request.url's origin can be the internal host
+  // (→ redirect to localhost). Prefer the forwarded host so we land on the
+  // public URL. Locally there is no forwarded host, so fall back to origin.
+  const forwardedHost = request.headers.get("x-forwarded-host");
+  const forwardedProto = request.headers.get("x-forwarded-proto") ?? "https";
+  const baseUrl =
+    process.env.NODE_ENV !== "development" && forwardedHost
+      ? `${forwardedProto}://${forwardedHost}`
+      : origin;
+
   if (code) {
     const supabase = await createClient();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (!error) {
-      return NextResponse.redirect(`${origin}${next}`);
+      return NextResponse.redirect(`${baseUrl}${next}`);
     }
   }
 
-  return NextResponse.redirect(`${origin}/login?error=auth`);
+  return NextResponse.redirect(`${baseUrl}/login?error=auth`);
 }
